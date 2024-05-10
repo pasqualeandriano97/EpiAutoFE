@@ -1,9 +1,13 @@
 import "./App.css";
+import NavBarComponent from "./components/NavBar/NavBarComponent";
+import "../custom.css";
 
 function App() {
   return (
     <>
-      <header></header>
+      <header>
+        <NavBarComponent />
+      </header>
       <main></main>
       <footer></footer>
     </>

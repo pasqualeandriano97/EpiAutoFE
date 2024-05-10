@@ -1,0 +1,10 @@
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+$new-primary: #bb0102;
+$new-secondary: #999999;
+$new-theme-colors: (
+  "primary": $new-primary,
+  "secondary": $new-secondary,
+);
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
+@import "./node_modules/bootstrap/scss/bootstrap";
