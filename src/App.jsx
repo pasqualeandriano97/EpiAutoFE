@@ -1,6 +1,7 @@
 import "./App.css";
 import NavBarComponent from "./components/NavBar/NavBarComponent";
 import "../custom.css";
+import VehicleList from "./components/home/VehicleList";
 
 function App() {
   return (
@@ -8,7 +9,9 @@ function App() {
       <header>
         <NavBarComponent />
       </header>
-      <main></main>
+      <main className="root">
+        <VehicleList />
+      </main>
       <footer></footer>
     </>
   );
