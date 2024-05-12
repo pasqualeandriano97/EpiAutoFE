@@ -10,6 +10,9 @@ import {
 import { register, login } from "../../Data/Auth";
 import { userDetails } from "../../Data/User";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { saveToken } from "../../redux/actions/userActions";
+import { Link } from "react-router-dom";
 
 function NavbarComponent() {
   const initialStateR = {
@@ -35,6 +38,7 @@ function NavbarComponent() {
   const [formdataR, setFormdataR] = useState(initialStateR);
   const [formdataL, setFormdataL] = useState(initialStateL);
   const [formdataU, setFormdataU] = useState(initialStateU);
+  const dispatch = useDispatch();
   const handleRegister = (e) => {
     e.preventDefault();
     register(formdataR);
@@ -44,6 +48,7 @@ function NavbarComponent() {
     e.preventDefault();
     login(formdataL).then((data) => {
       window.localStorage.setItem("token", data.token);
+      dispatch(saveToken(data.token));
       setToken(data.token);
       handleUser(data.token);
     });
@@ -66,7 +71,7 @@ function NavbarComponent() {
   }, []);
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary py-0">
+      <Navbar expand="lg" className="bg-body-tertiary py-0 fixed-top">
         <Container fluid className="px-4">
           <Navbar.Brand href="#home">
             <Image
@@ -79,8 +84,12 @@ function NavbarComponent() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+              <Link to="/myrent" className="nav-link">
+                Tuoi noleggi
+              </Link>
             </Nav>
             {!token ? (
               <Nav>
@@ -93,7 +102,7 @@ function NavbarComponent() {
             ) : (
               <Nav>
                 <Nav.Item className="pe-3">
-                  <p>
+                  <p className="mt-3">
                     Ciao! {formdataU.name} {formdataU.surname}
                   </p>
                 </Nav.Item>

@@ -2,6 +2,7 @@ import { allVehicles } from "../../Data/vehicle";
 export const GET_VEHICLES = "GET_VEHICLES";
 export const TURN_OFF_SPINNER = "TURN_OFF_SPINNER";
 export const TURN_ON_SPINNER = "TURN_ON_SPINNER";
+export const UPDATE_PAGE = "UPDATE_PAGE";
 
 export const getVehicles = (token, page) => {
   return async (dispatch) => {
@@ -13,5 +14,12 @@ export const getVehicles = (token, page) => {
     } finally {
       dispatch({ type: TURN_OFF_SPINNER });
     }
+  };
+};
+
+export const newPage = (payload) => {
+  return {
+    type: UPDATE_PAGE,
+    payload: payload,
   };
 };
