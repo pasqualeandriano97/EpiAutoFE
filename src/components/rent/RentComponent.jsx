@@ -44,7 +44,7 @@ const RentComponent = () => {
   function formatDate(dateStr) {
     const date = new Date(dateStr);
     const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // getMonth() ritorna un indice da 0 a 11
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
   }
@@ -140,47 +140,55 @@ const RentComponent = () => {
           </Row>
         </Col>
       </Row>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Riepilogo prenotazione noleggio</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="d-flex">
-            <div className="w-100">
-              <h5>Veicolo</h5>
-              <p>
-                {preventive.vehicle.brand} {preventive.vehicle.model}
-              </p>
-              <p>
-                {preventive.vehicle.year} - {preventive.vehicle.fuelType}
-              </p>
-              <p>{preventive.vehicle.type.toUpperCase()}</p>
+      {preventive ? (
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Riepilogo prenotazione noleggio</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="d-flex">
+              <div className="w-100">
+                <h5>Veicolo</h5>
+                <p>
+                  {preventive.vehicle.brand} {preventive.vehicle.model}
+                </p>
+                <p>
+                  {preventive.vehicle.year} - {preventive.vehicle.fuelType}
+                </p>
+                <p>{preventive.vehicle.type.toUpperCase()}</p>
+              </div>
+              <div className="w-100 h-100">
+                <Image
+                  src={preventive.vehicle.imageUrl}
+                  className="w-100 h-100 "
+                />
+              </div>
             </div>
-            <div className="w-100 h-100">
-              <Image
-                src={preventive.vehicle.imageUrl}
-                className="w-100 h-100 "
-              />
+            <h5>Noleggio</h5>
+            <p>Data inizio Noleggio: {formatDate(preventive.startDate)}</p>
+            <p>Data fine Noleggio: {formatDate(preventive.endDate)}</p>
+            <p>Data dell&apos;appuntamento: {formatDate(preventive.date)}</p>
+            <p>Ora dell&apos;appuntamento: {preventive.time}</p>
+          </Modal.Body>
+          <Modal.Footer className="d-flex justify-content-between align-items-center">
+            <h5>Prezzo: {preventive.price} &euro;</h5>
+            <div>
+              <Button
+                variant="secondary"
+                onClick={handleClose}
+                className="me-2"
+              >
+                Chiudi
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Prenota Ora
+              </Button>
             </div>
-          </div>
-          <h5>Noleggio</h5>
-          <p>Data inizio Noleggio: {formatDate(preventive.startDate)}</p>
-          <p>Data fine Noleggio: {formatDate(preventive.endDate)}</p>
-          <p>Data dell&apos;appuntamento: {formatDate(preventive.date)}</p>
-          <p>Ora dell&apos;appuntamento: {preventive.time}</p>
-        </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-between align-items-center">
-          <h5>Prezzo: {preventive.price} &euro;</h5>
-          <div>
-            <Button variant="secondary" onClick={handleClose} className="me-2">
-              Chiudi
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Prenota Ora
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal>
+          </Modal.Footer>
+        </Modal>
+      ) : (
+        ""
+      )}
     </Container>
   );
 };
