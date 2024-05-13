@@ -1,4 +1,4 @@
-import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -12,6 +12,9 @@ const RentComponent = () => {
   const [endDate, setEndDate] = useState();
   const token = window.localStorage.getItem("token");
   const currentCar = useSelector((state) => state.rent.currentCar);
+  const preventive = useSelector((state) => state.rent.preventive);
+  const show = useSelector((state) => state.rent.show);
+
   const formatter = (string) => {
     const date = new Date(string);
     const formattedDate = date.toLocaleDateString("it-IT", {
@@ -38,6 +41,16 @@ const RentComponent = () => {
         startHour: hour,
       })
     );
+  };
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // getMonth() ritorna un indice da 0 a 11
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+  const handleClose = () => {
+    dispatch({ type: "HIDE_MODAL" });
   };
 
   return (
@@ -101,7 +114,7 @@ const RentComponent = () => {
               />
             </Col>
             <Col className="d-flex flex-column justify-content-center align-items-center mt-3 ">
-              <h5 className="text-dark ">Data e ora di ritiro del veicolo</h5>
+              <h5 className="text-dark ">Data e ora dell'appuntamento</h5>
               <DatePicker
                 selected={date1}
                 className="bg-light rounded-3 "
@@ -128,6 +141,47 @@ const RentComponent = () => {
           </Row>
         </Col>
       </Row>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Riepilogo prenotazione noleggio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex">
+            <div className="w-100">
+              <h5>Veicolo</h5>
+              <p>
+                {preventive.vehicle.brand} {preventive.vehicle.model}
+              </p>
+              <p>
+                {preventive.vehicle.year} - {preventive.vehicle.fuelType}
+              </p>
+              <p>{preventive.vehicle.type.toUpperCase()}</p>
+            </div>
+            <div className="w-100 h-100">
+              <Image
+                src={preventive.vehicle.imageUrl}
+                className="w-100 h-100 "
+              />
+            </div>
+          </div>
+          <h5>Noleggio</h5>
+          <p>Data inizio Noleggio: {formatDate(preventive.startDate)}</p>
+          <p>Data fine Noleggio: {formatDate(preventive.endDate)}</p>
+          <p>Data dell'appuntamento: {formatDate(preventive.date)}</p>
+          <p>Ora dell'appuntamento: {preventive.time}</p>
+        </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-between align-items-center">
+          <h5>Prezzo: {preventive.price} &euro;</h5>
+          <div>
+            <Button variant="secondary" onClick={handleClose} className="me-2">
+              Chiudi
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Prenota Ora
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
