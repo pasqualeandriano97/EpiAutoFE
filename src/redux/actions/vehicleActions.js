@@ -10,16 +10,18 @@ export const getVehicles = (token, page) => {
       dispatch({ type: TURN_ON_SPINNER });
       const response = await allVehicles(token, page);
       dispatch({ type: GET_VEHICLES, payload: response.content });
-      console.log(response.content);
+      dispatch({
+        type: UPDATE_PAGE,
+        payload: {
+          page: response.number,
+          firstPage: response.first,
+          lastPage: response.last,
+          totalPages: response.totalPages,
+        },
+      });
+      console.log(response);
     } finally {
       dispatch({ type: TURN_OFF_SPINNER });
     }
-  };
-};
-
-export const newPage = (payload) => {
-  return {
-    type: UPDATE_PAGE,
-    payload: payload,
   };
 };

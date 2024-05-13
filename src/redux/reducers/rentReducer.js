@@ -1,7 +1,8 @@
-import { SET_CURRENT_CAR } from "../actions/rentActions";
+import { SET_CURRENT_CAR, SET_PREVENTIVE } from "../actions/rentActions";
 
 const initialState = {
   currentCar: "",
+  preventive: "",
 };
 
 export const rentReducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ export const rentReducer = (state = initialState, action) => {
       return {
         ...state,
         currentCar: action.payload,
+      };
+    case SET_PREVENTIVE:
+      console.log("Date received in reducer:", action.payload);
+      return {
+        ...state,
+        preventive: action.payload,
       };
     default:
       return state;

@@ -31,7 +31,10 @@ export const vehicleReducer = (state = initialState, action) => {
     case UPDATE_PAGE:
       return {
         ...state,
-        page: action.payload,
+        page: action.payload.page,
+        firstPage: action.payload.firstPage,
+        lastPage: action.payload.lastPage,
+        totalPages: action.payload.totalPages,
       };
     default:
       return state;

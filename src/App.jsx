@@ -2,6 +2,7 @@ import "./App.css";
 import NavBarComponent from "./components/NavBar/NavBarComponent";
 import "../custom.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "react-datepicker/dist/react-datepicker.css";
 import VehicleList from "./components/home/VehicleList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RentComponent from "./components/rent/RentComponent";

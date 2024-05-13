@@ -1,10 +1,9 @@
 import { Button, Container, Row, Spinner, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getVehicles, newPage } from "../../redux/actions/vehicleActions";
+import { getVehicles } from "../../redux/actions/vehicleActions";
 import { useEffect } from "react";
 import SingleCar from "./SingleCar";
 import { useState } from "react";
-// import { useEffect } from "react";
 
 const VehicleList = () => {
   const token = window.localStorage.getItem("token");
@@ -13,6 +12,8 @@ const VehicleList = () => {
   const loading = useSelector((state) => state.vehicle.loading);
   const tokenR = useSelector((state) => state.user.token);
   const page = useSelector((state) => state.vehicle.page);
+  const firstPage = useSelector((state) => state.vehicle.firstPage);
+  const lastPage = useSelector((state) => state.vehicle.lastPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,12 +23,10 @@ const VehicleList = () => {
     }
   }, [vehicleList.length, tokenR]);
   const handleClickUp = () => {
-    dispatch(newPage(page + 1));
     dispatch(getVehicles(token, page + 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const handleClickDown = () => {
-    dispatch(newPage(page - 1));
     dispatch(getVehicles(token, page - 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -53,23 +52,37 @@ const VehicleList = () => {
             {vehicleList.map((vehicle, i) => (
               <SingleCar key={i} vehicle={vehicle} />
             ))}
-            <Col className="d-flex justify-content-center align-items-center  mb-5">
-              <Button
-                variant="secondary"
-                className="border border-radius"
-                onClick={handleClickDown}
-              >
-                <i className="bi bi-arrow-left-circle"></i>
-              </Button>
-              <p className="mx-3 mt-2  text-secondary">{page}</p>
-              <Button
-                variant="secondary"
-                className="border border-radius"
-                onClick={handleClickUp}
-              >
-                <i className="bi bi-arrow-right-circle"></i>
-              </Button>
-            </Col>
+            {token === null ? (
+              ""
+            ) : (
+              <div className="d-block">
+                <Col className="d-flex justify-content-center align-items-center  mb-5">
+                  {firstPage ? (
+                    ""
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      className="border border-radius"
+                      onClick={handleClickDown}
+                    >
+                      <i className="bi bi-arrow-left-circle"></i>
+                    </Button>
+                  )}
+                  <p className="mx-3 mt-2  text-secondary">{page + 1}</p>
+                  {lastPage ? (
+                    ""
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      className="border border-radius"
+                      onClick={handleClickUp}
+                    >
+                      <i className="bi bi-arrow-right-circle"></i>
+                    </Button>
+                  )}
+                </Col>
+              </div>
+            )}
           </>
         )}
       </Row>
