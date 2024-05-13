@@ -6,7 +6,6 @@ import { setPreventive } from "../../redux/actions/rentActions";
 
 const RentComponent = () => {
   const dispatch = useDispatch();
-  const [date, setDate] = useState(new Date());
   const [date1, setDate1] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -114,7 +113,7 @@ const RentComponent = () => {
               />
             </Col>
             <Col className="d-flex flex-column justify-content-center align-items-center mt-3 ">
-              <h5 className="text-dark ">Data e ora dell'appuntamento</h5>
+              <h5 className="text-dark ">Data e ora dell&apos;appuntamento</h5>
               <DatePicker
                 selected={date1}
                 className="bg-light rounded-3 "
@@ -167,8 +166,8 @@ const RentComponent = () => {
           <h5>Noleggio</h5>
           <p>Data inizio Noleggio: {formatDate(preventive.startDate)}</p>
           <p>Data fine Noleggio: {formatDate(preventive.endDate)}</p>
-          <p>Data dell'appuntamento: {formatDate(preventive.date)}</p>
-          <p>Ora dell'appuntamento: {preventive.time}</p>
+          <p>Data dell&apos;appuntamento: {formatDate(preventive.date)}</p>
+          <p>Ora dell&apos;appuntamento: {preventive.time}</p>
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between align-items-center">
           <h5>Prezzo: {preventive.price} &euro;</h5>
