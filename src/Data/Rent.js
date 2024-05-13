@@ -20,3 +20,26 @@ export const showRent = (token, payload) => {
       alert(error.message);
     });
 };
+
+export const saveRent = (token, payload) => {
+  return fetch("http://localhost:3001/rent/save", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then((data) => {
+          throw new Error(data.message);
+        });
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};

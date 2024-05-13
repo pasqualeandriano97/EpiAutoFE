@@ -2,7 +2,7 @@ import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import { setPreventive } from "../../redux/actions/rentActions";
+import { setPreventive, saveRentA } from "../../redux/actions/rentActions";
 
 const RentComponent = () => {
   const dispatch = useDispatch();
@@ -50,6 +50,19 @@ const RentComponent = () => {
   }
   const handleClose = () => {
     dispatch({ type: "HIDE_MODAL" });
+  };
+
+  const handleSave = () => {
+    dispatch(
+      saveRentA(token, {
+        startDate: formatDate(preventive.startDate),
+        endDate: formatDate(preventive.endDate),
+        date: formatDate(preventive.date),
+        time: hour,
+        vehicle: preventive.vehicle.plate,
+      })
+    );
+    handleClose();
   };
 
   return (
@@ -180,7 +193,7 @@ const RentComponent = () => {
               >
                 Chiudi
               </Button>
-              <Button variant="primary" onClick={handleClose}>
+              <Button variant="primary" onClick={handleSave}>
                 Prenota Ora
               </Button>
             </div>
