@@ -3,6 +3,7 @@ export const GET_VEHICLES = "GET_VEHICLES";
 export const TURN_OFF_SPINNER = "TURN_OFF_SPINNER";
 export const TURN_ON_SPINNER = "TURN_ON_SPINNER";
 export const UPDATE_PAGE = "UPDATE_PAGE";
+export const RESET_VEHICLES = "RESET_VEHICLES";
 
 export const getVehicles = (token, page) => {
   return async (dispatch) => {
@@ -19,7 +20,6 @@ export const getVehicles = (token, page) => {
           totalPages: response.totalPages,
         },
       });
-      console.log(response);
     } finally {
       dispatch({ type: TURN_OFF_SPINNER });
     }

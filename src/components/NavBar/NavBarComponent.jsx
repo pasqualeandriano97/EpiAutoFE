@@ -12,7 +12,8 @@ import { userDetails } from "../../Data/User";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../redux/actions/userActions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { RESET_VEHICLES } from "../../redux/actions/vehicleActions";
 
 function NavbarComponent() {
   const initialStateR = {
@@ -39,6 +40,7 @@ function NavbarComponent() {
   const [formdataL, setFormdataL] = useState(initialStateL);
   const [formdataU, setFormdataU] = useState(initialStateU);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     register(formdataR);
@@ -69,6 +71,13 @@ function NavbarComponent() {
       handleUser(token);
     }
   }, []);
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    setToken("");
+    dispatch(saveToken(""));
+    dispatch({ type: RESET_VEHICLES });
+    navigate("/");
+  };
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary py-0 fixed-top">
@@ -102,9 +111,18 @@ function NavbarComponent() {
             ) : (
               <Nav>
                 <Nav.Item className="pe-3">
-                  <p className="mt-3">
+                  <p className="mt-3 mb-1">
                     Ciao! {formdataU.name} {formdataU.surname}
                   </p>
+                  <div className="d-flex justify-content-end">
+                    <Button
+                      className="mb-1 ms-auto"
+                      variant="primary"
+                      onClick={logout}
+                    >
+                      Logout
+                    </Button>
+                  </div>
                 </Nav.Item>
               </Nav>
             )}

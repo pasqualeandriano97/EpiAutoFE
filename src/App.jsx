@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import VehicleList from "./components/home/VehicleList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RentComponent from "./components/rent/RentComponent";
+import MyRentComponent from "./components/rent/MyRentComponent";
 function App() {
   return (
     <BrowserRouter>
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<VehicleList />} />
           <Route path="/rent" element={<RentComponent />} />
-          <Route path="/myrent" element={<RentComponent />} />
+          <Route path="/myrent" element={<MyRentComponent />} />
         </Routes>
       </main>
       <footer></footer>

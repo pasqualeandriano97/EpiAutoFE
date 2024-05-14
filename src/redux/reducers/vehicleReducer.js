@@ -1,5 +1,6 @@
 import {
   GET_VEHICLES,
+  RESET_VEHICLES,
   TURN_OFF_SPINNER,
   TURN_ON_SPINNER,
   UPDATE_PAGE,
@@ -18,6 +19,8 @@ export const vehicleReducer = (state = initialState, action) => {
         ...state,
         content: action.payload,
       };
+    case RESET_VEHICLES:
+      return initialState;
     case TURN_ON_SPINNER:
       return {
         ...state,

@@ -3,11 +3,13 @@ import {
   SET_PREVENTIVE,
   SHOW_MODAL,
   HIDE_MODAL,
+  SET_MY_RENTS,
 } from "../actions/rentActions";
 
 const initialState = {
   currentCar: "",
   preventive: "",
+  myRents: [],
   show: false,
 };
 
@@ -33,6 +35,11 @@ export const rentReducer = (state = initialState, action) => {
       return {
         ...state,
         show: false,
+      };
+    case SET_MY_RENTS:
+      return {
+        ...state,
+        myRents: action.payload,
       };
     default:
       return state;
