@@ -65,3 +65,48 @@ export const getMyRents = (token) => {
       alert(error.message);
     });
 };
+
+export const deleteRent = (token, id) => {
+  return fetch("http://localhost:3001/rent/me?rentId=" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then((data) => {
+          throw new Error(data.message);
+        });
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
+
+export const postRent = (token, rent, payload) => {
+  return fetch("http://localhost:3001/rent/post?rentId=" + rent, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then((data) => {
+          throw new Error(data.message);
+        });
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};

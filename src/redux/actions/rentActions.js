@@ -3,7 +3,14 @@ export const SET_PREVENTIVE = "SET_PREVENTIVE";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const SET_MY_RENTS = "SET_MY_RENTS";
-import { showRent, saveRent, getMyRents } from "../../Data/Rent";
+import {
+  showRent,
+  saveRent,
+  getMyRents,
+  deleteRent,
+  postRent,
+} from "../../Data/Rent";
+import { useDispatch } from "react-redux";
 
 export const setPreventive = (token, payload) => {
   return async (dispatch) => {
@@ -35,5 +42,25 @@ export const getMyRentsA = (token) => {
       console.log(response);
       dispatch({ type: SET_MY_RENTS, payload: response });
     }
+  };
+};
+
+export const deleteRentA = (token, payload) => {
+  return async () => {
+    const response = await deleteRent(token, payload);
+    console.log(response);
+    alert(response.message);
+  };
+};
+
+export const postRentA = (token, rent, payload) => {
+  return async (dispatch) => {
+    const response = await postRent(token, rent, payload);
+    if (response) {
+      alert("Noleggio modificato con successo!");
+      dispatch(getMyRentsA(token));
+    }
+
+    console.log(response);
   };
 };
