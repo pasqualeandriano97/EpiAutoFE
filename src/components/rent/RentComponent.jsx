@@ -6,13 +6,19 @@ import { setPreventive, saveRentA } from "../../redux/actions/rentActions";
 
 const RentComponent = () => {
   const dispatch = useDispatch();
+  const [show1, setShow1] = useState(false);
   const [date1, setDate1] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const token = window.localStorage.getItem("token");
   const currentCar = useSelector((state) => state.rent.currentCar);
   const preventive = useSelector((state) => state.rent.preventive);
+  const rent = useSelector((state) => state.rent.currentRent);
   const show = useSelector((state) => state.rent.show);
+  const handleShow1 = () => {
+    setShow1(true);
+  };
+  const handleClose1 = () => setShow1(false);
 
   const formatter = (string) => {
     const date = new Date(string);
@@ -63,6 +69,7 @@ const RentComponent = () => {
       })
     );
     handleClose();
+    handleShow1();
   };
 
   return (
@@ -199,7 +206,7 @@ const RentComponent = () => {
               >
                 Chiudi
               </Button>
-              <Button variant="primary" onClick={handleSave}>
+              <Button variant="primary" onClick={() => handleSave()}>
                 Prenota Ora
               </Button>
             </div>
@@ -208,6 +215,22 @@ const RentComponent = () => {
       ) : (
         ""
       )}
+      <Modal show={show1} onHide={handleClose1}>
+        <Modal.Header closeButton>
+          <Modal.Title>Noleggio prenotato con successo!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {" "}
+          Questo è il codice che mostrerai all&apos;operatore in sede: &quot;
+          {rent.id} &quot;{"\n"}Puoi consultare, modificare e annullare i tuoi
+          noleggi nella sezione &quot;Tuoi Noleggi&quot;
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose1}>
+            Chiudi
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

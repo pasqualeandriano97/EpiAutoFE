@@ -9,12 +9,19 @@ import {
 
 const AppointmentComponent = () => {
   const dispatch = useDispatch();
+  const [show1, setShow1] = useState(false);
   const [date1, setDate1] = useState();
   const token = window.localStorage.getItem("token");
   const currentCar = useSelector((state) => state.appointment.currentCar);
   const summary = useSelector((state) => state.appointment.summary);
   const show = useSelector((state) => state.appointment.show);
-
+  const currentAppointment = useSelector(
+    (state) => state.appointment.currentAppointment
+  );
+  const handleShow1 = () => {
+    setShow1(true);
+  };
+  const handleClose1 = () => setShow1(false);
   const formatter = (string) => {
     const date = new Date(string);
     const formattedDate = date.toLocaleDateString("it-IT", {
@@ -56,6 +63,7 @@ const AppointmentComponent = () => {
       })
     );
     handleClose();
+    handleShow1();
   };
 
   return (
@@ -174,6 +182,23 @@ const AppointmentComponent = () => {
       ) : (
         ""
       )}
+      <Modal show={show1} onHide={handleClose1}>
+        <Modal.Header closeButton>
+          <Modal.Title>Appuntamento fissato con successo!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {" "}
+          Questo è il codice che mostrerai all&apos;operatore in sede: &quot;
+          {currentAppointment.id} &quot;{"\n"}Puoi consultare, modificare e
+          annullare i tuoi appuntamenti nella sezione &quot;Tuoi
+          Appuntamenti&quot;
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose1}>
+            Chiudi
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

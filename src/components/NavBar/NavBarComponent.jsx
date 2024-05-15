@@ -33,9 +33,12 @@ function NavbarComponent() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
+  const [showLogout, setShowLogout] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleClose1 = () => setShow1(false);
+  const handleShowLogout = () => setShowLogout(true);
+  const handleCloseLogout = () => setShowLogout(false);
   const [formdataR, setFormdataR] = useState(initialStateR);
   const [formdataL, setFormdataL] = useState(initialStateL);
   const [formdataU, setFormdataU] = useState(initialStateU);
@@ -78,6 +81,7 @@ function NavbarComponent() {
     dispatch({ type: RESET_VEHICLES });
     dispatch({ type: "RESET_REDUX_RENT" });
     dispatch({ type: "RESET_REDUX_APPOINTMENT" });
+    handleCloseLogout();
     navigate("/");
   };
   return (
@@ -123,7 +127,7 @@ function NavbarComponent() {
                     <Button
                       className="mb-1 ms-auto"
                       variant="primary"
-                      onClick={logout}
+                      onClick={handleShowLogout}
                     >
                       Logout
                     </Button>
@@ -227,6 +231,20 @@ function NavbarComponent() {
           </Button>
           <Button variant="Secondary" onClick={handleClose1}>
             Chiudi
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showLogout} onHide={handleCloseLogout}>
+        <Modal.Header closeButton>
+          <Modal.Title>A presto!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Sei sicuro di voler uscire?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseLogout}>
+            Annulla
+          </Button>
+          <Button variant="primary" onClick={logout}>
+            Esci
           </Button>
         </Modal.Footer>
       </Modal>

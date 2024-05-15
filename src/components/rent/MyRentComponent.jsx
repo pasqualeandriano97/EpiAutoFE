@@ -14,7 +14,13 @@ const MyRentComponent = () => {
   const myRents = useSelector((state) => state.rent.myRents);
   const currentCar = useSelector((state) => state.rent.currentRent);
   const show = useSelector((state) => state.rent.show);
+  const [show1, setShow1] = useState(false);
   const [date1, setDate1] = useState();
+  const handleShow1 = (current) => {
+    dispatch({ type: "SET_RENT_CAR", payload: current });
+    setShow1(true);
+  };
+  const handleClose1 = () => setShow1(false);
   const handleClose = () => dispatch(dispatch({ type: "HIDE_MODAL" }));
   const handleShow = (current) => {
     dispatch({ type: "SHOW_MODAL" });
@@ -34,6 +40,7 @@ const MyRentComponent = () => {
   }
   const handleDelete = (rentId) => {
     dispatch(deleteRentA(token, rentId));
+    handleClose1();
   };
   const handleModify = (rentId) => {
     dispatch(
@@ -107,15 +114,36 @@ const MyRentComponent = () => {
                     <Button
                       variant="primary"
                       onClick={() => {
-                        handleDelete(rent.id);
+                        handleShow1(rent);
                       }}
                     >
                       Cancella
                     </Button>
+                    <Modal show={show1} onHide={handleClose1}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Attenzione!</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Sei sicuro di voler eliminare questo Noleggio?
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose1}>
+                          Annulla
+                        </Button>
+                        <Button
+                          variant="primary"
+                          onClick={() => {
+                            handleDelete(currentCar.id);
+                          }}
+                        >
+                          Elimina
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 </Col>
               </Row>
-              {currentCar && (
+              {currentCar && currentCar.vehicle && (
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>

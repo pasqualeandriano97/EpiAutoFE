@@ -27,12 +27,9 @@ export const saveRentA = (token, payload) => {
   return async (dispatch) => {
     const response = await saveRent(token, payload);
     if (response) {
-      alert(
-        `Noleggio prenotato con successo! Questo è il codice che mostrerai all'operatore in sede: " ${response.id} "\nPuoi consultare, modificare e annullare i tuoi noleggi nella sezione "Tuoi Noleggi"`
-      );
+      dispatch({ type: SET_RENT_CAR, payload: response });
+      dispatch(getMyRentsA(token));
     }
-    console.log(response);
-    dispatch(getMyRentsA(token));
   };
 };
 

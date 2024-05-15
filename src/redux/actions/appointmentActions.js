@@ -27,9 +27,7 @@ export const saveAppointmentA = (token, payload) => {
   return async (dispatch) => {
     const response = await saveAppointment(token, payload);
     if (response) {
-      alert(
-        `Appuntamento prenotato con successo! Questo è il codice che mostrerai all'operatore in sede: " ${response.id} "\nPuoi consultare, modificare e annullare i tuoi appuntamenti nella sezione "Tuoi Appuntamenti"`
-      );
+      dispatch({ type: SET_APPOINTMENT, payload: response });
       dispatch(getMyAppointmentsA(token));
     }
     console.log(response);

@@ -9,6 +9,12 @@ import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 
 const MyAppointmentsComponent = () => {
+  const [show1, setShow1] = useState(false);
+  const handleShow1 = (current) => {
+    setShow1(true);
+    dispatch({ type: "SET_APPOINTMENT", payload: current });
+  };
+  const handleClose1 = () => setShow1(false);
   const dispatch = useDispatch();
   const token = window.localStorage.getItem("token");
   const myAppointments = useSelector(
@@ -41,12 +47,13 @@ const MyAppointmentsComponent = () => {
     const hour = newDate.getHours();
     return hour;
   };
-  const handleDelete = (rentId) => {
-    dispatch(deleteAppointmentA(token, rentId));
+  const handleDelete = (appointmentId) => {
+    dispatch(deleteAppointmentA(token, appointmentId));
+    handleClose1();
   };
-  const handleModify = (rentId) => {
+  const handleModify = (appointmentId) => {
     dispatch(
-      postAppointmentA(token, rentId, {
+      postAppointmentA(token, appointmentId, {
         date: formatDate(date1),
         hour: getHour(date1),
       })
@@ -109,7 +116,7 @@ const MyAppointmentsComponent = () => {
                     <Button
                       variant="primary"
                       onClick={() => {
-                        handleDelete(appointment.id);
+                        handleShow1(appointment);
                       }}
                     >
                       Cancella
@@ -117,7 +124,28 @@ const MyAppointmentsComponent = () => {
                   </div>
                 </Col>
               </Row>
-              {currentCar && (
+              <Modal show={show1} onHide={handleClose1}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Attenzione!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  Sei sicuro di voler eliminare questo Appuntamento?
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose1}>
+                    Annulla
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      handleDelete(currentCar.id);
+                    }}
+                  >
+                    Elimina
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              {currentCar && currentCar.vehicle && (
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>
