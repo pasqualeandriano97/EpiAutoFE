@@ -7,6 +7,8 @@ import VehicleList from "./components/home/VehicleList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RentComponent from "./components/rent/RentComponent";
 import MyRentComponent from "./components/rent/MyRentComponent";
+import AppointmentComponent from "./components/appointment/AppointmentComponent";
+import MyAppointmentsComponent from "./components/appointment/MyAppointmentsComponent";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,8 @@ function App() {
           <Route path="/" element={<VehicleList />} />
           <Route path="/rent" element={<RentComponent />} />
           <Route path="/myrent" element={<MyRentComponent />} />
+          <Route path="/appointment" element={<AppointmentComponent />} />
+          <Route path="/myappointments" element={<MyAppointmentsComponent />} />
         </Routes>
       </main>
       <footer></footer>
