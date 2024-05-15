@@ -12,12 +12,16 @@ const MyRentComponent = () => {
   const dispatch = useDispatch();
   const token = window.localStorage.getItem("token");
   const myRents = useSelector((state) => state.rent.myRents);
-  const [show, setShow] = useState(false);
+  const currentCar = useSelector((state) => state.rent.currentRent);
+  const show = useSelector((state) => state.rent.show);
   const [date1, setDate1] = useState();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => dispatch(dispatch({ type: "HIDE_MODAL" }));
+  const handleShow = (current) => {
+    dispatch({ type: "SHOW_MODAL" });
+    dispatch({ type: "SET_RENT_CAR", payload: current });
+  };
   useEffect(() => {
-    if (myRents.content === undefined) {
+    if (myRents.length === 0) {
       dispatch(getMyRentsA(token));
     }
   }, []);
@@ -30,7 +34,6 @@ const MyRentComponent = () => {
   }
   const handleDelete = (rentId) => {
     dispatch(deleteRentA(token, rentId));
-    dispatch(getMyRentsA(token));
   };
   const handleModify = (rentId) => {
     dispatch(
@@ -42,12 +45,13 @@ const MyRentComponent = () => {
 
   return (
     <Container style={{ marginTop: "100px" }}>
-      <h1 className="text-white text-center mb-5">
-        Qui c&apos;è la lista dei tuoi Noleggi!!Grazie per averci scelto!
+      <h1 className="text-white text-center ">
+        Qui c&apos;è la lista dei tuoi Noleggi!!
       </h1>
+      <h1 className="text-white text-center mb-5">Grazie per averci scelto!</h1>
       <Row>
-        {myRents.content &&
-          myRents.content.map((rent) => (
+        {myRents &&
+          myRents.map((rent) => (
             <Col key={rent.id} className="col-12">
               <Row className="bg-secondary rounded-3 mb-3 p-2">
                 <Col className="col-4">
@@ -95,7 +99,7 @@ const MyRentComponent = () => {
                       variant="secondary"
                       className="border-2 border-white me-3"
                       onClick={() => {
-                        handleShow();
+                        handleShow(rent);
                       }}
                     >
                       Modifica
@@ -111,51 +115,57 @@ const MyRentComponent = () => {
                   </div>
                 </Col>
               </Row>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>
-                    Non ti basta il tempo? Puoi posticipare la fine qui!
-                  </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <h5> Dettagli noleggio</h5>
-                  <p>
-                    {rent.vehicle.brand} {rent.vehicle.model}
-                  </p>
-                  <p>
-                    {rent.vehicle.year} - {rent.vehicle.fuelType}
-                  </p>
-                  <p>
-                    Data di inizio del noleggio: {formatDate(rent.startDate)}
-                  </p>
-                  <p>Data di fine del noleggio: {formatDate(rent.endDate)}</p>
-                  <p>Inserisci la nuova data di fine del noleggio</p>
-                  <DatePicker
-                    selected={date1}
-                    className="bg-light rounded-3 "
-                    dateFormat={"dd/MM/yyyy"}
-                    minDate={rent.endDate}
-                    onChange={(date) => {
-                      setDate1(date);
-                      console.log("Selected date:", date);
-                    }}
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Annulla
-                  </Button>
-                  <Button
-                    variant="primary"
-                    onClick={() => {
-                      handleModify(rent.id);
-                      handleClose();
-                    }}
-                  >
-                    Posticipa
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+              {currentCar && (
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      Non ti basta il tempo? Puoi posticipare la fine qui!
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <h5> Dettagli noleggio</h5>
+                    <p>
+                      {currentCar.vehicle.brand} {currentCar.vehicle.model}
+                    </p>
+                    <p>
+                      {currentCar.vehicle.year} - {currentCar.vehicle.fuelType}
+                    </p>
+                    <p>
+                      Data di inizio del noleggio:{" "}
+                      {formatDate(currentCar.startDate)}
+                    </p>
+                    <p>
+                      Data di fine del noleggio:{" "}
+                      {formatDate(currentCar.endDate)}
+                    </p>
+                    <p>Inserisci la nuova data di fine del noleggio</p>
+                    <DatePicker
+                      selected={date1}
+                      className="bg-light rounded-3 "
+                      dateFormat={"dd/MM/yyyy"}
+                      minDate={currentCar.endDate}
+                      onChange={(date) => {
+                        setDate1(date);
+                        console.log("Selected date:", date);
+                      }}
+                    />
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Annulla
+                    </Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        handleModify(currentCar.id);
+                        handleClose();
+                      }}
+                    >
+                      Posticipa
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              )}
             </Col>
           ))}
       </Row>

@@ -1,13 +1,16 @@
 import {
   SET_CURRENT_CAR,
+  SET_RENT_CAR,
   SET_PREVENTIVE,
   SHOW_MODAL,
   HIDE_MODAL,
   SET_MY_RENTS,
+  RESET_REDUX_RENT,
 } from "../actions/rentActions";
 
 const initialState = {
   currentCar: "",
+  currentRent: "",
   preventive: "",
   myRents: [],
   show: false,
@@ -25,6 +28,19 @@ export const rentReducer = (state = initialState, action) => {
       return {
         ...state,
         preventive: action.payload,
+      };
+    case SET_RENT_CAR:
+      return {
+        ...state,
+        currentRent: action.payload,
+      };
+    case RESET_REDUX_RENT:
+      return {
+        currentCar: "",
+        currentRent: "",
+        preventive: "",
+        myRents: [],
+        show: false,
       };
     case SHOW_MODAL:
       return {

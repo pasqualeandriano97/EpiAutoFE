@@ -1,8 +1,10 @@
 export const SET_CURRENT_CAR = "SET_CURRENT_CAR";
+export const SET_RENT_CAR = "SET_RENT_CAR";
 export const SET_PREVENTIVE = "SET_PREVENTIVE";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const SET_MY_RENTS = "SET_MY_RENTS";
+export const RESET_REDUX_RENT = "RESET_REDUX_RENT";
 import {
   showRent,
   saveRent,
@@ -22,7 +24,7 @@ export const setPreventive = (token, payload) => {
 };
 
 export const saveRentA = (token, payload) => {
-  return async () => {
+  return async (dispatch) => {
     const response = await saveRent(token, payload);
     if (response) {
       alert(
@@ -30,6 +32,7 @@ export const saveRentA = (token, payload) => {
       );
     }
     console.log(response);
+    dispatch(getMyRentsA(token));
   };
 };
 
@@ -38,16 +41,18 @@ export const getMyRentsA = (token) => {
     const response = await getMyRents(token);
     if (response) {
       console.log(response);
-      dispatch({ type: SET_MY_RENTS, payload: response });
+      dispatch({ type: SET_MY_RENTS, payload: response.content });
     }
   };
 };
 
 export const deleteRentA = (token, payload) => {
-  return async () => {
+  return async (dispatch) => {
     const response = await deleteRent(token, payload);
-    console.log(response);
-    alert(response.message);
+    if (response) {
+      alert(response.message);
+      dispatch(getMyRentsA(token));
+    }
   };
 };
 

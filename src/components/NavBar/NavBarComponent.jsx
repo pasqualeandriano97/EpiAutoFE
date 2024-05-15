@@ -76,6 +76,8 @@ function NavbarComponent() {
     setToken("");
     dispatch(saveToken(""));
     dispatch({ type: RESET_VEHICLES });
+    dispatch({ type: "RESET_REDUX_RENT" });
+    dispatch({ type: "RESET_REDUX_APPOINTMENT" });
     navigate("/");
   };
   return (

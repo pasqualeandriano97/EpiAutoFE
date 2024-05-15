@@ -1,12 +1,16 @@
 import {
   SET_APPOINTMENT_CAR,
+  SET_APPOINTMENT,
   SET_SUMMARY,
+  SET_MY_APPOINTMENTS,
   SHOW_MODAL,
   HIDE_MODAL,
+  RESET_REDUX_APPOINTMENT,
 } from "../actions/appointmentActions";
 
 const initialState = {
-  currentCar: {},
+  currentCar: "",
+  currentAppointment: "",
   summary: "",
   myAppointments: [],
   show: false,
@@ -23,6 +27,24 @@ export const appointmentReducer = (state = initialState, action) => {
       return {
         ...state,
         summary: action.payload,
+      };
+    case SET_MY_APPOINTMENTS:
+      return {
+        ...state,
+        myAppointments: action.payload,
+      };
+    case SET_APPOINTMENT:
+      return {
+        ...state,
+        currentAppointment: action.payload,
+      };
+    case RESET_REDUX_APPOINTMENT:
+      return {
+        currentCar: "",
+        currentAppointment: "",
+        summary: "",
+        myAppointments: [],
+        show: false,
       };
     case SHOW_MODAL:
       return {
