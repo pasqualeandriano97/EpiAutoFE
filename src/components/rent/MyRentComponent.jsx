@@ -6,11 +6,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 
 const MyRentComponent = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = window.localStorage.getItem("token");
   const myRents = useSelector((state) => state.rent.myRents);

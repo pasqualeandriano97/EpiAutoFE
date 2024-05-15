@@ -99,6 +99,9 @@ function NavbarComponent() {
               <Link to="/myrent" className="nav-link">
                 Tuoi noleggi
               </Link>
+              <Link to="/myappointments" className="nav-link">
+                Tuoi Appuntamenti
+              </Link>
             </Nav>
             {!token ? (
               <Nav>

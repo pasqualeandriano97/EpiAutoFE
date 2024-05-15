@@ -1,12 +1,18 @@
-import { Col, Card, Button } from "react-bootstrap";
+import { Col, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const SingleCar = (vehicle) => {
   const dispatch = useDispatch();
-  const handleSelectCar = () => {
+  const handleSelectCarRent = () => {
     dispatch({
       type: "SET_CURRENT_CAR",
+      payload: vehicle.vehicle,
+    });
+  };
+  const handleSelectCarAppointment = () => {
+    dispatch({
+      type: "SET_APPOINTMENT_CAR",
       payload: vehicle.vehicle,
     });
   };
@@ -31,11 +37,17 @@ const SingleCar = (vehicle) => {
           {vehicle.vehicle.state === "AVAILABLE" ? (
             <div className="mt-auto">
               <div className="d-flex justify-content-around">
-                <Button variant="primary">Compra</Button>
+                <Link
+                  to="/appointment"
+                  className="btn btn-primary"
+                  onClick={handleSelectCarAppointment}
+                >
+                  Compra
+                </Link>
                 <Link
                   to="/rent"
                   className="btn btn-secondary"
-                  onClick={handleSelectCar}
+                  onClick={handleSelectCarRent}
                 >
                   Noleggia
                 </Link>

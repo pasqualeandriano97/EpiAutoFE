@@ -10,7 +10,6 @@ import {
   deleteRent,
   postRent,
 } from "../../Data/Rent";
-import { useDispatch } from "react-redux";
 
 export const setPreventive = (token, payload) => {
   return async (dispatch) => {
@@ -23,13 +22,12 @@ export const setPreventive = (token, payload) => {
 };
 
 export const saveRentA = (token, payload) => {
-  return async (dispatch) => {
+  return async () => {
     const response = await saveRent(token, payload);
     if (response) {
       alert(
         `Noleggio prenotato con successo! Questo è il codice che mostrerai all'operatore in sede: " ${response.id} "\nPuoi consultare, modificare e annullare i tuoi noleggi nella sezione "Tuoi Noleggi"`
       );
-      dispatch({ type: SET_MY_RENTS, payload: response });
     }
     console.log(response);
   };
