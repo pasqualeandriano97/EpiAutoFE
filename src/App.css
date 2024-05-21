@@ -41,6 +41,16 @@
   color: #888;
 } */
 
-.root {
+.background {
   background-color: #242424;
+}
+
+.image {
+  background-image: url(../public/hero.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  min-width: 100vw;
 }

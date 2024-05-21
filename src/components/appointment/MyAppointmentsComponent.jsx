@@ -59,7 +59,19 @@ const MyAppointmentsComponent = () => {
       })
     );
   };
+  const translateFuel = (fuel) => {
+    switch (fuel) {
+      case "GASOLINE":
+        return "BENZINA";
+      case "DIESEL":
+        return "DIESEL";
+      case "ELECTRIC":
+        return "ELETTRICA";
 
+      default:
+        return "Errore";
+    }
+  };
   return (
     <Container style={{ marginTop: "100px" }}>
       <h1 className="text-white text-center ">
@@ -82,7 +94,8 @@ const MyAppointmentsComponent = () => {
                     {appointment.vehicle.brand} {appointment.vehicle.model}
                   </h4>
                   <p className="text-white text-center">
-                    {appointment.vehicle.year} - {appointment.vehicle.fuelType}
+                    {appointment.vehicle.year} -{" "}
+                    {translateFuel(appointment.vehicle.fuelType)}
                   </p>
                 </Col>
                 <Col className="d-flex flex-column justify-content-center ">
@@ -158,7 +171,8 @@ const MyAppointmentsComponent = () => {
                       {currentCar.vehicle.brand} {currentCar.vehicle.model}
                     </p>
                     <p>
-                      {currentCar.vehicle.year} - {currentCar.vehicle.fuelType}
+                      {currentCar.vehicle.year} -{" "}
+                      {translateFuel(currentCar.vehicle.fuelType)}
                     </p>
                     <p>
                       Data dell&apos;appuntamento: {formatDate(currentCar.date)}

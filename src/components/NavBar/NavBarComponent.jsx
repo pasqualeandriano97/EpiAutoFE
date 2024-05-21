@@ -6,6 +6,7 @@ import {
   Button,
   Modal,
   Form,
+  Dropdown,
 } from "react-bootstrap";
 import { register, login } from "../../Data/Auth";
 import { userDetails } from "../../Data/User";
@@ -56,6 +57,7 @@ function NavbarComponent() {
       dispatch(saveToken(data.token));
       setToken(data.token);
       handleUser(data.token);
+      navigate("/vehicle");
     });
     setShow(false);
   };
@@ -102,12 +104,21 @@ function NavbarComponent() {
               <Link to="/" className="nav-link">
                 Home
               </Link>
-              <Link to="/myrent" className="nav-link">
-                Tuoi noleggi
-              </Link>
-              <Link to="/myappointments" className="nav-link">
-                Tuoi Appuntamenti
-              </Link>
+              {token && (
+                <Link to="/vehicle" className="nav-link">
+                  Parco Auto
+                </Link>
+              )}
+              {token && (
+                <Link to="/myrent" className="nav-link">
+                  Tuoi noleggi
+                </Link>
+              )}
+              {token && (
+                <Link to="/myappointments" className="nav-link">
+                  Tuoi Appuntamenti
+                </Link>
+              )}
             </Nav>
             {!token ? (
               <Nav>
@@ -120,18 +131,35 @@ function NavbarComponent() {
             ) : (
               <Nav>
                 <Nav.Item className="pe-3">
-                  <p className="mt-3 mb-1">
-                    Ciao! {formdataU.name} {formdataU.surname}
-                  </p>
-                  <div className="d-flex justify-content-end">
-                    <Button
-                      className="mb-1 ms-auto"
-                      variant="primary"
-                      onClick={handleShowLogout}
+                  <Dropdown className="mb-3 mb-lg-0 ">
+                    <Dropdown.Toggle
+                      className="text-dark bg-body-secondary border-secondary"
+                      id="dropdown-basic"
                     >
-                      Logout
-                    </Button>
-                  </div>
+                      Ciao! {formdataU.name} {formdataU.surname}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item className="my-2">
+                        <Link
+                          to="/user"
+                          className="text-dark text-decoration-none"
+                        >
+                          Dettagli Account
+                        </Link>
+                      </Dropdown.Item>
+
+                      <Dropdown.Item>
+                        <Button
+                          className="mb-1 ms-auto"
+                          variant="primary"
+                          onClick={handleShowLogout}
+                        >
+                          Logout
+                        </Button>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Nav.Item>
               </Nav>
             )}

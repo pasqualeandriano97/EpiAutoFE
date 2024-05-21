@@ -65,6 +65,19 @@ const AppointmentComponent = () => {
     handleClose();
     handleShow1();
   };
+  const translateFuel = (fuel) => {
+    switch (fuel) {
+      case "GASOLINE":
+        return "BENZINA";
+      case "DIESEL":
+        return "DIESEL";
+      case "ELECTRIC":
+        return "ELETTRICA";
+
+      default:
+        return "Errore";
+    }
+  };
 
   return (
     <Container style={{ marginTop: "150px" }}>
@@ -85,7 +98,7 @@ const AppointmentComponent = () => {
                 {currentCar.brand} {currentCar.model}
               </h1>
               <p className="text-dark ms-3">
-                {currentCar.year} - {currentCar.fuelType}
+                {currentCar.year} - {translateFuel(currentCar.fuelType)}
               </p>
               <p className="text-dark ms-3 border-bottom ">
                 {currentCar.type.toUpperCase()}
@@ -149,7 +162,8 @@ const AppointmentComponent = () => {
                   {summary.vehicle.brand} {summary.vehicle.model}
                 </p>
                 <p>
-                  {summary.vehicle.year} - {summary.vehicle.fuelType}
+                  {summary.vehicle.year} -{" "}
+                  {translateFuel(summary.vehicle.fuelType)}
                 </p>
                 <p>{summary.vehicle.type.toUpperCase()}</p>
               </div>

@@ -49,7 +49,19 @@ const MyRentComponent = () => {
       })
     );
   };
+  const translateFuel = (fuel) => {
+    switch (fuel) {
+      case "GASOLINE":
+        return "BENZINA";
+      case "DIESEL":
+        return "DIESEL";
+      case "ELECTRIC":
+        return "ELETTRICA";
 
+      default:
+        return "Errore";
+    }
+  };
   return (
     <Container style={{ marginTop: "100px" }}>
       <h1 className="text-white text-center ">
@@ -69,7 +81,7 @@ const MyRentComponent = () => {
                     {rent.vehicle.brand} {rent.vehicle.model}
                   </h4>
                   <p className="text-white text-center">
-                    {rent.vehicle.year} - {rent.vehicle.fuelType}
+                    {rent.vehicle.year} - {translateFuel(rent.vehicle.fuelType)}
                   </p>
                 </Col>
                 <Col className="d-flex flex-column justify-content-center ">

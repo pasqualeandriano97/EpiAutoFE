@@ -16,6 +16,19 @@ const SingleCar = (vehicle) => {
       payload: vehicle.vehicle,
     });
   };
+  const translateFuel = (fuel) => {
+    switch (fuel) {
+      case "GASOLINE":
+        return "BENZINA";
+      case "DIESEL":
+        return "DIESEL";
+      case "ELECTRIC":
+        return "ELETTRICA";
+
+      default:
+        return "Errore";
+    }
+  };
   return (
     <Col className="col-12 col-md-4 col-lg-3">
       <Card style={{ height: "100%" }}>
@@ -29,7 +42,7 @@ const SingleCar = (vehicle) => {
             {vehicle.vehicle.brand} {vehicle.vehicle.model}
           </Card.Title>
           <Card.Text className="mb-1">
-            {vehicle.vehicle.year} - {vehicle.vehicle.fuelType}
+            {vehicle.vehicle.year} - {translateFuel(vehicle.vehicle.fuelType)}
           </Card.Text>
           <Card.Text className="flex-grow-1">
             {vehicle.vehicle.type.toUpperCase()}

@@ -30,19 +30,10 @@ const VehicleList = () => {
     dispatch(getVehicles(token, page - 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return (
     <Container className="pt-5 mt-5">
       <Row className="justify-content-center g-4">
-        {token === null ? (
-          <div className="text-center mt-5 d-flex align-items-center justify-content-center">
-            <h1 className="text-secondary">
-              Effettua l&apos;accesso per consultare tutto il nostro fantastico
-              parco auto!!
-            </h1>
-          </div>
-        ) : (
-          ""
-        )}
         {loading ? (
           <div className="text-center vh-100 d-flex align-items-center justify-content-center">
             <Spinner animation="border" variant="secondary" />

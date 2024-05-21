@@ -9,19 +9,24 @@ import RentComponent from "./components/rent/RentComponent";
 import MyRentComponent from "./components/rent/MyRentComponent";
 import AppointmentComponent from "./components/appointment/AppointmentComponent";
 import MyAppointmentsComponent from "./components/appointment/MyAppointmentsComponent";
+import HomeComponent from "./components/home/HomeComponent";
+import UserDetails from "./components/user/UserDetails";
+
 function App() {
   return (
     <BrowserRouter>
       <header>
         <NavBarComponent />
       </header>
-      <main className="root">
+      <main className="background">
         <Routes>
-          <Route path="/" element={<VehicleList />} />
+          <Route path="/" element={<HomeComponent />} />
+          <Route path="/vehicle" element={<VehicleList />} />
           <Route path="/rent" element={<RentComponent />} />
           <Route path="/myrent" element={<MyRentComponent />} />
           <Route path="/appointment" element={<AppointmentComponent />} />
           <Route path="/myappointments" element={<MyAppointmentsComponent />} />
+          <Route path="/user" element={<UserDetails />} />
         </Routes>
       </main>
       <footer></footer>

@@ -47,6 +47,19 @@ const RentComponent = () => {
       })
     );
   };
+  const translateFuel = (fuel) => {
+    switch (fuel) {
+      case "GASOLINE":
+        return "BENZINA";
+      case "DIESEL":
+        return "DIESEL";
+      case "ELECTRIC":
+        return "ELETTRICA";
+
+      default:
+        return "Errore";
+    }
+  };
   function formatDate(dateStr) {
     const date = new Date(dateStr);
     const day = date.getDate().toString().padStart(2, "0");
@@ -91,7 +104,7 @@ const RentComponent = () => {
                 {currentCar.brand} {currentCar.model}
               </h1>
               <p className="text-dark ms-3">
-                {currentCar.year} - {currentCar.fuelType}
+                {currentCar.year} - {translateFuel(currentCar.fuelType)}
               </p>
               <p className="text-dark ms-3 border-bottom ">
                 {currentCar.type.toUpperCase()}
@@ -179,7 +192,8 @@ const RentComponent = () => {
                   {preventive.vehicle.brand} {preventive.vehicle.model}
                 </p>
                 <p>
-                  {preventive.vehicle.year} - {preventive.vehicle.fuelType}
+                  {preventive.vehicle.year} -{" "}
+                  {translateFuel(preventive.vehicle.fuelType)}
                 </p>
                 <p>{preventive.vehicle.type.toUpperCase()}</p>
               </div>
