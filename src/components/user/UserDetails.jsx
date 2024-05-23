@@ -1,10 +1,26 @@
-import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  Alert,
+  Modal,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { saveUser, updateUserA } from "../../redux/actions/userActions";
+import {
+  saveUser,
+  updateUserA,
+  deleteUserA,
+} from "../../redux/actions/userActions";
+import { RESET_VEHICLES } from "../../redux/actions/vehicleActions";
+import { saveToken } from "../../redux/actions/userActions";
 
 const UserDetails = () => {
   const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
   const user = useSelector((state) => state.user.user);
   const formData = {
     name: user.name,
@@ -14,6 +30,7 @@ const UserDetails = () => {
 
   const token = window.localStorage.getItem("token");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const handleModify = (e) => {
@@ -26,11 +43,21 @@ const UserDetails = () => {
     dispatch(saveUser(token));
     setShow(false);
   };
+  const handleShow = () => setShow1(true);
+  const handleClose = () => setShow1(false);
   useEffect(() => {
-    if (!user) {
-      dispatch(saveUser(token));
-    }
+    dispatch(saveUser(token));
   }, []);
+  const handleDelete = () => {
+    dispatch(deleteUserA(token));
+    dispatch({ type: "DELETE_USER" });
+    dispatch(saveToken(""));
+    window.localStorage.removeItem("token");
+    dispatch({ type: RESET_VEHICLES });
+    dispatch({ type: "RESET_REDUX_RENT" });
+    dispatch({ type: "RESET_REDUX_APPOINTMENT" });
+    navigate("/");
+  };
   return (
     <Container style={{ marginTop: "100px" }}>
       {user && (
@@ -55,7 +82,9 @@ const UserDetails = () => {
               >
                 Modifica
               </Button>
-              <Button variant="secondary">Elimina</Button>
+              <Button variant="secondary" onClick={handleShow}>
+                Elimina
+              </Button>
             </div>
           </Col>
           {show && (
@@ -72,7 +101,6 @@ const UserDetails = () => {
                     onChange={(e) => (formData.name = e.target.value)}
                   />
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="surname">
                   <Form.Label>Cognome</Form.Label>
                   <Form.Control
@@ -121,6 +149,26 @@ const UserDetails = () => {
           )}
         </Row>
       )}
+      <Modal show={show1} onHide={handleClose}>
+        <Modal.Dialog>
+          <Modal.Header closeButton>
+            <Modal.Title>Arrivederci!</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <p>Sei sicuro di voler eliminare il tuo profilo?</p>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Annulla
+            </Button>
+            <Button variant="primary" onClick={handleDelete}>
+              Conferma
+            </Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      </Modal>
     </Container>
   );
 };

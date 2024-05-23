@@ -1,6 +1,7 @@
 export const SAVE_TOKEN = "SAVE_TOKEN";
 export const SAVE_USER = "SAVE_USER";
-import { userDetails, updateUser } from "../../Data/User";
+export const DELETE_USER = "DELETE_USER";
+import { userDetails, updateUser, deleteUser } from "../../Data/User";
 
 export const saveToken = (token) => {
   return {
@@ -20,6 +21,13 @@ export const updateUserA = (token, user) => {
   return async (dispatch) => {
     const response = await updateUser(token, user);
     dispatch({ type: SAVE_USER, payload: response });
-    console.log(response);
+  };
+};
+
+export const deleteUserA = (token) => {
+  return async (dispatch) => {
+    const response = await deleteUser(token);
+    dispatch({ type: DELETE_USER });
+    alert(response.message);
   };
 };

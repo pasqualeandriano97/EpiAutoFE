@@ -1,4 +1,4 @@
-import { SAVE_TOKEN, SAVE_USER } from "../actions/userActions";
+import { SAVE_TOKEN, SAVE_USER, DELETE_USER } from "../actions/userActions";
 
 const initialState = {
   token: "",
@@ -16,6 +16,11 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case DELETE_USER:
+      return {
+        ...state,
+        user: "",
       };
     default:
       return state;

@@ -9,12 +9,12 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import { register, login } from "../../Data/Auth";
-import { userDetails } from "../../Data/User";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { saveToken } from "../../redux/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { saveToken, saveUser } from "../../redux/actions/userActions";
 import { Link, useNavigate } from "react-router-dom";
 import { RESET_VEHICLES } from "../../redux/actions/vehicleActions";
+import { DELETE_USER } from "../../redux/actions/userActions";
 
 function NavbarComponent() {
   const initialStateR = {
@@ -27,11 +27,8 @@ function NavbarComponent() {
     email: "",
     password: "",
   };
-  const initialStateU = {
-    name: "",
-    surname: "",
-  };
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  const token = window.localStorage.getItem("token");
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [showLogout, setShowLogout] = useState();
@@ -42,7 +39,8 @@ function NavbarComponent() {
   const handleCloseLogout = () => setShowLogout(false);
   const [formdataR, setFormdataR] = useState(initialStateR);
   const [formdataL, setFormdataL] = useState(initialStateL);
-  const [formdataU, setFormdataU] = useState(initialStateU);
+  const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleRegister = (e) => {
@@ -55,34 +53,33 @@ function NavbarComponent() {
     login(formdataL).then((data) => {
       window.localStorage.setItem("token", data.token);
       dispatch(saveToken(data.token));
-      setToken(data.token);
+      // setToken(data.token);
       handleUser(data.token);
       navigate("/vehicle");
     });
     setShow(false);
   };
   const handleUser = (token) => {
-    userDetails(token).then((data) => {
-      setFormdataU({ ...formdataU, name: data.name, surname: data.surname });
-    });
+    dispatch(saveUser(token));
   };
   const translateModal = () => {
     setShow(false);
     setShow1(true);
   };
   useEffect(() => {
-    setToken(window.localStorage.getItem("token"));
     if (token) {
       handleUser(token);
     }
   }, []);
   const logout = () => {
     window.localStorage.removeItem("token");
-    setToken("");
+    // setToken("");
+
     dispatch(saveToken(""));
     dispatch({ type: RESET_VEHICLES });
     dispatch({ type: "RESET_REDUX_RENT" });
     dispatch({ type: "RESET_REDUX_APPOINTMENT" });
+    dispatch({ type: DELETE_USER });
     handleCloseLogout();
     navigate("/");
   };
@@ -136,17 +133,19 @@ function NavbarComponent() {
                       className="text-dark bg-body-secondary border-secondary"
                       id="dropdown-basic"
                     >
-                      Ciao! {formdataU.name} {formdataU.surname}
+                      Ciao! {user.name} {user.surname}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item className="my-2">
-                        <Link
-                          to="/user"
-                          className="text-dark text-decoration-none"
-                        >
-                          Dettagli Account
-                        </Link>
+                      <Dropdown.Item as="div" className="my-2">
+                        <div>
+                          <Link
+                            to="/user"
+                            className="text-dark text-decoration-none"
+                          >
+                            Dettagli Account
+                          </Link>
+                        </div>
                       </Dropdown.Item>
 
                       <Dropdown.Item>

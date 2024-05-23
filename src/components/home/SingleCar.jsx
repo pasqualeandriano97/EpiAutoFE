@@ -52,14 +52,14 @@ const SingleCar = (vehicle) => {
               <div className="d-flex justify-content-around">
                 <Link
                   to="/appointment"
-                  className="btn btn-primary"
+                  className="btn btn-primary px-3 px-md-1 px-xl-3"
                   onClick={handleSelectCarAppointment}
                 >
                   Compra
                 </Link>
                 <Link
                   to="/rent"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary px-3 px-md-1 px-xl-3"
                   onClick={handleSelectCarRent}
                 >
                   Noleggia

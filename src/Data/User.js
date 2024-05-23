@@ -43,3 +43,25 @@ export const updateUser = (token, user) => {
       console.log(error.message);
     });
 };
+
+export const deleteUser = (token) => {
+  return fetch(`http://localhost:3001/user/me`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then((data) => {
+          throw new Error(data.message);
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};

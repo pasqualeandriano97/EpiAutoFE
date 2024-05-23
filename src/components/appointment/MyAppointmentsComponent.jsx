@@ -83,13 +83,13 @@ const MyAppointmentsComponent = () => {
           myAppointments.map((appointment) => (
             <Col key={appointment.id} className="col-12">
               <Row className="bg-secondary rounded-3 mb-3 p-2">
-                <Col className="col-4">
+                <Col className="col-6 col-md-6 col-lg-4 mb-3 mb-lg-0">
                   <Image
                     src={appointment.vehicle.imageUrl}
                     className="w-100 h-100"
                   />
                 </Col>
-                <Col className="d-flex flex-column justify-content-center">
+                <Col className="d-flex flex-column justify-content-center col-6 col-lg-2 ">
                   <h4 className="text-white text-center">
                     {appointment.vehicle.brand} {appointment.vehicle.model}
                   </h4>
@@ -98,7 +98,7 @@ const MyAppointmentsComponent = () => {
                     {translateFuel(appointment.vehicle.fuelType)}
                   </p>
                 </Col>
-                <Col className="d-flex flex-column justify-content-center ">
+                <Col className="d-flex flex-column justify-content-center col-6 col-lg-3 ">
                   <p className="text-white text-center mb-0 ">
                     Data dell&apos;appuntamento:
                   </p>
@@ -110,8 +110,8 @@ const MyAppointmentsComponent = () => {
                   </p>
                   <p className="text-white text-center ">{appointment.hour}</p>
                 </Col>
-                <Col className="d-flex flex-column justify-content-between ">
-                  <div className="pt-5">
+                <Col className="d-flex flex-column justify-content-between  col-6 col-lg-3">
+                  <div className="pt-5 mb-3 mb-lg-1">
                     <h4 className="text-white text-center">
                       Codice Prenotazione: {appointment.id}
                     </h4>
@@ -119,7 +119,7 @@ const MyAppointmentsComponent = () => {
                   <div className="d-flex justify-content-center pb-5 ">
                     <Button
                       variant="secondary"
-                      className="border-2 border-white me-3"
+                      className="border-2 border-white me-3 p-3 p-lg-2"
                       onClick={() => {
                         handleShow(appointment);
                       }}

@@ -82,10 +82,7 @@ const AppointmentComponent = () => {
   return (
     <Container style={{ marginTop: "150px" }}>
       <Row className="justify-content-center ">
-        <Col
-          md={5}
-          className="bg-light rounded-3 border-end border-1 border-dark"
-        >
+        <Col className="bg-light rounded-3 border-end border-1 border-dark col-12 col-md-5">
           <Row className="flex-column">
             <Col>
               <Image
@@ -111,10 +108,7 @@ const AppointmentComponent = () => {
           </Row>
         </Col>
 
-        <Col
-          md={5}
-          className="bg-light rounded-3 border-start border-3 border-dark d-flex flex-column"
-        >
+        <Col className="bg-light rounded-3 ms-0 ms-lg-1 my-2 my-lg-0 d-flex flex-column col-12 col-md-5">
           <div>
             <h3 className="text-dark text-center my-2 pb-2  border-bottom">
               Complila questi campi per fissare un appuntamento!
@@ -137,7 +131,7 @@ const AppointmentComponent = () => {
                 }}
               />
             </Col>
-            <Col className="d-flex flex-column justify-content-center align-items-center mt-3 ">
+            <Col className="d-flex flex-column justify-content-center align-items-center  mt-3 pb-2 pb-lg-0 ">
               <Button
                 variant="primary"
                 className="border border-radius"
