@@ -45,12 +45,74 @@
   background-color: #242424;
 }
 
-.image {
-  background-image: url(../public/hero.png);
-  background-size: cover;
+/* .image {
+  background-image: url(../public/fullWideHero2.png);
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  min-height: 100vh;
-  min-width: 100vw;
+} */
+@media screen and (max-width: 1670px) {
+  .image {
+    margin-top: 70px;
+    background-image: url(../public/desktopHero.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: local;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .image {
+    margin-top: 70px;
+    background-image: url(../public/desktopHero.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: local;
+    min-height: 85vh;
+    min-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .image {
+    margin-top: 70px;
+    background-image: url(../public/desktopHero.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: local;
+    min-height: 70vh;
+    min-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .image {
+    margin-top: 70px;
+    background-image: url(../public/mediumHero1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: local;
+    min-height: 140vh;
+    min-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .image {
+    margin-top: 80px;
+    background-image: url(../public/mobileHero.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: local;
+    min-height: 102vh;
+    min-width: 100vw;
+  }
 }
