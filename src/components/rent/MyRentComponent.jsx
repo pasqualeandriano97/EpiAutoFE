@@ -57,7 +57,8 @@ const MyRentComponent = () => {
         return "DIESEL";
       case "ELECTRIC":
         return "ELETTRICA";
-
+      case "HYBRID":
+        return "HYBRID";
       default:
         return "Errore";
     }

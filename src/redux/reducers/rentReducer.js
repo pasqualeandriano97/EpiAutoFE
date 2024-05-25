@@ -14,6 +14,7 @@ const initialState = {
   preventive: "",
   myRents: [],
   show: false,
+  loading: false,
 };
 
 export const rentReducer = (state = initialState, action) => {
