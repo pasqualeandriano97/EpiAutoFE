@@ -91,7 +91,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1024px) {
   .image {
     margin-top: 70px;
     background-image: url(../public/mediumHero1.png);
