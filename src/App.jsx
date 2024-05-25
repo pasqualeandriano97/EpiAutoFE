@@ -10,7 +10,6 @@ import MyRentComponent from "./components/rent/MyRentComponent";
 import AppointmentComponent from "./components/appointment/AppointmentComponent";
 import MyAppointmentsComponent from "./components/appointment/MyAppointmentsComponent";
 import HomeComponent from "./components/home/HomeComponent";
-import HomeMobileComponent from "./components/home/HomeMobileComponent";
 import UserDetails from "./components/user/UserDetails";
 
 function App() {
