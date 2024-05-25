@@ -1,6 +1,7 @@
 export const showAppointment = (token, payload) => {
   return fetch(
-    "http://localhost:3001/appointment/me?plate=" + payload.vehicle,
+    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/appointment/me?plate=" +
+      payload.vehicle,
     {
       method: "POST",
       headers: {
@@ -25,14 +26,17 @@ export const showAppointment = (token, payload) => {
 };
 
 export const saveAppointment = (token, payload) => {
-  return fetch("http://localhost:3001/appointment/me/save", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  })
+  return fetch(
+    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/appointment/me/save",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -48,13 +52,16 @@ export const saveAppointment = (token, payload) => {
 };
 
 export const getMyAppointments = (token) => {
-  return fetch("http://localhost:3001/appointment/me", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
+  return fetch(
+    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/appointment/me",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -71,7 +78,8 @@ export const getMyAppointments = (token) => {
 
 export const postAppointment = (token, appointment, payload) => {
   return fetch(
-    "http://localhost:3001/appointment/me?appointmentId=" + appointment,
+    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/appointment/me?appointmentId=" +
+      appointment,
     {
       method: "PUT",
       headers: {
@@ -96,13 +104,16 @@ export const postAppointment = (token, appointment, payload) => {
 };
 
 export const deleteAppointment = (token, id) => {
-  return fetch("http://localhost:3001/appointment/" + id, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
+  return fetch(
+    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/appointment/" + id,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();

@@ -1,11 +1,14 @@
 export const allVehicles = (token, page) => {
-  return fetch(`http://localhost:3001/vehicle?page=${page}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
+  return fetch(
+    `https://epiauto-andrianopasquale-b63eda7e.koyeb.app/vehicle?page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();

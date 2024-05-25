@@ -1,5 +1,5 @@
 export const userDetails = (token) => {
-  return fetch(`http://localhost:3001/user/me`, {
+  return fetch(`https://epiauto-andrianopasquale-b63eda7e.koyeb.app/user/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export const userDetails = (token) => {
 };
 
 export const updateUser = (token, user) => {
-  return fetch(`http://localhost:3001/user/me`, {
+  return fetch(`https://epiauto-andrianopasquale-b63eda7e.koyeb.app/user/me`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ export const updateUser = (token, user) => {
 };
 
 export const deleteUser = (token) => {
-  return fetch(`http://localhost:3001/user/me`, {
+  return fetch(`https://epiauto-andrianopasquale-b63eda7e.koyeb.app/user/me`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
