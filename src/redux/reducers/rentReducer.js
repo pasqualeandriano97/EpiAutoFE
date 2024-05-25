@@ -58,6 +58,7 @@ export const rentReducer = (state = initialState, action) => {
         ...state,
         myRents: action.payload,
       };
+
     default:
       return state;
   }

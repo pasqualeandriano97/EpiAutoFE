@@ -64,152 +64,159 @@ const MyRentComponent = () => {
     }
   };
   return (
-    <Container style={{ marginTop: "100px" }}>
-      <h1 className="text-white text-center ">
-        Qui c&apos;è la lista dei tuoi Noleggi!!
-      </h1>
-      <h1 className="text-white text-center mb-5">Grazie per averci scelto!</h1>
-      <Row>
-        {myRents &&
-          myRents.map((rent) => (
-            <Col key={rent.id} className="col-12">
-              <Row className="bg-secondary rounded-3 mb-3 p-2">
-                <Col className="col-6 col-md-6 col-lg-4 mb-3 mb-lg-0">
-                  <Image src={rent.vehicle.imageUrl} className="w-100 h-100" />
-                </Col>
-                <Col className="d-flex flex-column justify-content-center col-6 col-lg-2 ">
-                  <h4 className="text-white text-center">
-                    {rent.vehicle.brand} {rent.vehicle.model}
-                  </h4>
-                  <p className="text-white text-center">
-                    {rent.vehicle.year} - {translateFuel(rent.vehicle.fuelType)}
-                  </p>
-                </Col>
-                <Col className="d-flex flex-column justify-content-center col-6 col-lg-3">
-                  <p className="text-white text-center mb-0 ">
-                    Data di inizio del noleggio:
-                  </p>
-                  <p className="text-white text-center ">
-                    {formatDate(rent.startDate)}
-                  </p>
-                  <p className="text-white text-center mb-0 ">
-                    Data di fine del noleggio:
-                  </p>
-                  <p className="text-white text-center ">
-                    {formatDate(rent.endDate)}
-                  </p>
-                  <p className="text-white text-center mb-0 ">
-                    Data dell&apos;appuntamento:
-                  </p>
-                  <p className="text-white text-center ">
-                    {formatDate(rent.date)}
-                  </p>
-                </Col>
-                <Col className="d-flex flex-column justify-content-between col-6 col-lg-3 ">
-                  <div className="pt-5 mb-3 mb-lg-1">
-                    <h4 className="text-white text-center">
-                      Codice Prenotazione: {rent.id}
-                    </h4>
-                    <h4 className="text-white text-center">
-                      Totale: {rent.price} €
-                    </h4>
-                  </div>
-                  <div className="d-flex justify-content-center pb-5 ">
-                    <Button
-                      variant="secondary"
-                      className="border-2 border-white me-3 "
-                      onClick={() => {
-                        handleShow(rent);
-                      }}
-                    >
-                      Modifica
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={() => {
-                        handleShow1(rent);
-                      }}
-                    >
-                      Cancella
-                    </Button>
-                    <Modal show={show1} onHide={handleClose1}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Attenzione!</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        Sei sicuro di voler eliminare questo Noleggio?
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose1}>
-                          Annulla
-                        </Button>
-                        <Button
-                          variant="primary"
-                          onClick={() => {
-                            handleDelete(currentCar.id);
-                          }}
-                        >
-                          Elimina
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </div>
-                </Col>
-              </Row>
-              {currentCar && currentCar.vehicle && (
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      Non ti basta il tempo? Puoi posticipare la fine qui!
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <h5> Dettagli noleggio</h5>
-                    <p>
-                      {currentCar.vehicle.brand} {currentCar.vehicle.model}
-                    </p>
-                    <p>
-                      {currentCar.vehicle.year} - {currentCar.vehicle.fuelType}
-                    </p>
-                    <p>
-                      Data di inizio del noleggio:{" "}
-                      {formatDate(currentCar.startDate)}
-                    </p>
-                    <p>
-                      Data di fine del noleggio:{" "}
-                      {formatDate(currentCar.endDate)}
-                    </p>
-                    <p>Inserisci la nuova data di fine del noleggio</p>
-                    <DatePicker
-                      selected={date1}
-                      className="bg-light rounded-3 "
-                      dateFormat={"dd/MM/yyyy"}
-                      minDate={currentCar.endDate}
-                      onChange={(date) => {
-                        setDate1(date);
-                        console.log("Selected date:", date);
-                      }}
+    <Container fluid className="rentListBg">
+      <Container style={{ paddingTop: "85px" }}>
+        <h1 className="text-white text-center ">Grazie per averci scelto!</h1>
+        <h1 className="text-white text-center mb-5 ">Lista Noleggi</h1>
+
+        <Row>
+          {myRents &&
+            myRents.map((rent) => (
+              <Col key={rent.id} className="col-12  mb-3 mb-lg-0">
+                <Row className=" rounded-3 mb-3 p-2 rowBg">
+                  <Col className="col-6 col-md-6 col-lg-4  ">
+                    <Image
+                      src={rent.vehicle.imageUrl}
+                      className="w-100 h-100"
                     />
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Annulla
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={() => {
-                        handleModify(currentCar.id);
-                        handleClose();
-                      }}
-                    >
-                      Posticipa
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              )}
-            </Col>
-          ))}
-      </Row>
+                  </Col>
+                  <Col className="d-flex flex-column justify-content-center col-6 col-lg-2 ">
+                    <h4 className="text-white text-center">
+                      {rent.vehicle.brand} {rent.vehicle.model}
+                    </h4>
+                    <p className="text-white text-center">
+                      {rent.vehicle.year} -{" "}
+                      {translateFuel(rent.vehicle.fuelType)}
+                    </p>
+                  </Col>
+                  <Col className="d-flex flex-column justify-content-center col-6 col-lg-3">
+                    <p className="text-white text-center mb-0 ">
+                      Data di inizio del noleggio:
+                    </p>
+                    <p className="text-white text-center ">
+                      {formatDate(rent.startDate)}
+                    </p>
+                    <p className="text-white text-center mb-0 ">
+                      Data di fine del noleggio:
+                    </p>
+                    <p className="text-white text-center ">
+                      {formatDate(rent.endDate)}
+                    </p>
+                    <p className="text-white text-center mb-0 ">
+                      Data dell&apos;appuntamento:
+                    </p>
+                    <p className="text-white text-center ">
+                      {formatDate(rent.date)}
+                    </p>
+                  </Col>
+                  <Col className="d-flex flex-column justify-content-between col-6 col-lg-3 ">
+                    <div className="pt-5 mb-3 mb-lg-1">
+                      <h4 className="text-white text-center">
+                        Codice Prenotazione: {rent.id}
+                      </h4>
+                      <h4 className="text-white text-center">
+                        Totale: {rent.price} €
+                      </h4>
+                    </div>
+                    <div className="d-flex justify-content-center pb-5 ">
+                      <Button
+                        variant="secondary"
+                        className="border-2 border-white me-3 "
+                        onClick={() => {
+                          handleShow(rent);
+                        }}
+                      >
+                        Modifica
+                      </Button>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          handleShow1(rent);
+                        }}
+                      >
+                        Cancella
+                      </Button>
+                      <Modal show={show1} onHide={handleClose1}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Attenzione!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          Sei sicuro di voler eliminare questo Noleggio?
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose1}>
+                            Annulla
+                          </Button>
+                          <Button
+                            variant="primary"
+                            onClick={() => {
+                              handleDelete(currentCar.id);
+                            }}
+                          >
+                            Elimina
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </div>
+                  </Col>
+                </Row>
+
+                {currentCar && currentCar.vehicle && (
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>
+                        Non ti basta il tempo? Puoi posticipare la fine qui!
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <h5> Dettagli noleggio</h5>
+                      <p>
+                        {currentCar.vehicle.brand} {currentCar.vehicle.model}
+                      </p>
+                      <p>
+                        {currentCar.vehicle.year} -{" "}
+                        {currentCar.vehicle.fuelType}
+                      </p>
+                      <p>
+                        Data di inizio del noleggio:{" "}
+                        {formatDate(currentCar.startDate)}
+                      </p>
+                      <p>
+                        Data di fine del noleggio:{" "}
+                        {formatDate(currentCar.endDate)}
+                      </p>
+                      <p>Inserisci la nuova data di fine del noleggio</p>
+                      <DatePicker
+                        selected={date1}
+                        className="bg-light rounded-3 "
+                        dateFormat={"dd/MM/yyyy"}
+                        minDate={currentCar.endDate}
+                        onChange={(date) => {
+                          setDate1(date);
+                          console.log("Selected date:", date);
+                        }}
+                      />
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Annulla
+                      </Button>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          handleModify(currentCar.id);
+                          handleClose();
+                        }}
+                      >
+                        Posticipa
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                )}
+              </Col>
+            ))}
+        </Row>
+      </Container>
     </Container>
   );
 };

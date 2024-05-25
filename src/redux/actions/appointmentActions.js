@@ -5,6 +5,8 @@ export const SET_MY_APPOINTMENTS = "SET_MY_APPOINTMENTS";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const RESET_REDUX_APPOINTMENT = "RESET_REDUX_APPOINTMENT";
+export const LOADING_ON = "LOADING_ON";
+export const LOADING_OFF = "LOADING_OFF";
 import {
   showAppointment,
   saveAppointment,

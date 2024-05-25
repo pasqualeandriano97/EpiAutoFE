@@ -31,8 +31,8 @@ const SingleCar = (vehicle) => {
     }
   };
   return (
-    <Col className="col-12 col-md-4 col-lg-3">
-      <Card style={{ height: "100%" }}>
+    <Col className="col-12 col-md-4 col-lg-3 ">
+      <Card style={{ height: "100%" }} className="cardBg">
         <Card.Img
           variant="top"
           src={vehicle.vehicle.imageUrl || "placeholder.jpg"}
@@ -60,7 +60,7 @@ const SingleCar = (vehicle) => {
                 </Link>
                 <Link
                   to="/rent"
-                  className="btn btn-secondary px-3 px-md-1 px-xl-3"
+                  className="btn btn-secondary px-3 px-md-1 px-xl-3 border-1 border-dark"
                   onClick={handleSelectCarRent}
                 >
                   Noleggia

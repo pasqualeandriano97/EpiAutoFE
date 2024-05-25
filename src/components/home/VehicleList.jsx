@@ -32,51 +32,53 @@ const VehicleList = () => {
   };
 
   return (
-    <Container className="pt-5 mt-5">
-      <Row className="justify-content-center g-4">
-        {loading ? (
-          <div className="text-center vh-100 d-flex align-items-center justify-content-center">
-            <Spinner animation="border" variant="secondary" />
-          </div>
-        ) : (
-          <>
-            {vehicleList.map((vehicle, i) => (
-              <SingleCar key={i} vehicle={vehicle} />
-            ))}
-            {token === null ? (
-              ""
-            ) : (
-              <div className="d-block">
-                <Col className="d-flex justify-content-center align-items-center  mb-5">
-                  {firstPage ? (
-                    ""
-                  ) : (
-                    <Button
-                      variant="secondary"
-                      className="border border-radius"
-                      onClick={handleClickDown}
-                    >
-                      <i className="bi bi-arrow-left-circle"></i>
-                    </Button>
-                  )}
-                  <p className="mx-3 mt-2  text-secondary">{page + 1}</p>
-                  {lastPage ? (
-                    ""
-                  ) : (
-                    <Button
-                      variant="secondary"
-                      className="border border-radius"
-                      onClick={handleClickUp}
-                    >
-                      <i className="bi bi-arrow-right-circle"></i>
-                    </Button>
-                  )}
-                </Col>
-              </div>
-            )}
-          </>
-        )}
-      </Row>
+    <Container fluid className="mx-0 px-0 bgVehicleList">
+      <Container className="pt-5 mt-5">
+        <Row className="justify-content-center g-5">
+          {loading ? (
+            <div className="text-center vh-100 d-flex align-items-center justify-content-center">
+              <Spinner animation="border" variant="secondary" />
+            </div>
+          ) : (
+            <>
+              {vehicleList.map((vehicle, i) => (
+                <SingleCar key={i} vehicle={vehicle} />
+              ))}
+              {token === null ? (
+                ""
+              ) : (
+                <div className="d-block">
+                  <Col className="d-flex justify-content-center align-items-center  mb-5">
+                    {firstPage ? (
+                      ""
+                    ) : (
+                      <Button
+                        variant="secondary"
+                        className="border border-radius"
+                        onClick={handleClickDown}
+                      >
+                        <i className="bi bi-arrow-left-circle"></i>
+                      </Button>
+                    )}
+                    <p className="mx-3 mt-2  text-secondary">{page + 1}</p>
+                    {lastPage ? (
+                      ""
+                    ) : (
+                      <Button
+                        variant="secondary"
+                        className="border border-radius"
+                        onClick={handleClickUp}
+                      >
+                        <i className="bi bi-arrow-right-circle"></i>
+                      </Button>
+                    )}
+                  </Col>
+                </div>
+              )}
+            </>
+          )}
+        </Row>
+      </Container>
     </Container>
   );
 };
