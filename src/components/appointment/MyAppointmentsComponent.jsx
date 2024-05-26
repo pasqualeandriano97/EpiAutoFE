@@ -118,10 +118,10 @@ const MyAppointmentsComponent = () => {
                         Codice Prenotazione: {appointment.id}
                       </h4>
                     </div>
-                    <div className="d-flex justify-content-center pb-5 ">
+                    <div className="d-flex flex-column justify-content-center pb-4 px-4">
                       <Button
                         variant="secondary"
-                        className="border-2 border-white me-3 p-3 p-lg-2"
+                        className="border-2 border-white mb-3"
                         onClick={() => {
                           handleShow(appointment);
                         }}

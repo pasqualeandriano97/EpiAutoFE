@@ -118,10 +118,10 @@ const MyRentComponent = () => {
                         Totale: {rent.price} €
                       </h4>
                     </div>
-                    <div className="d-flex justify-content-center pb-5 ">
+                    <div className="d-flex flex-column justify-content-center pb-4 px-4">
                       <Button
                         variant="secondary"
-                        className="border-2 border-white me-3 "
+                        className="border-2 border-white mb-3 "
                         onClick={() => {
                           handleShow(rent);
                         }}
