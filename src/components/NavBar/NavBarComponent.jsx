@@ -85,9 +85,13 @@ function NavbarComponent() {
   };
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary py-0 fixed-top">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        className="bg-body-tertiary py-0 fixed-top"
+      >
         <Container fluid className="px-4">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand as={Link} to="/">
             <Image
               src={"NavBarLogo.png"}
               height={60}
@@ -98,23 +102,31 @@ function NavbarComponent() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
+              <Nav.Item>
+                <Nav.Link eventKey="1" as={Link} to="/">
+                  Home
+                </Nav.Link>
+              </Nav.Item>
               {token && (
-                <Link to="/vehicle" className="nav-link">
-                  Parco Auto
-                </Link>
+                <Nav.Item>
+                  <Nav.Link eventKey="2" as={Link} to="/vehicle">
+                    Parco Auto
+                  </Nav.Link>
+                </Nav.Item>
               )}
               {token && (
-                <Link to="/myrent" className="nav-link">
-                  Tuoi noleggi
-                </Link>
+                <Nav.Item>
+                  <Nav.Link eventKey="3" as={Link} to="/myrent">
+                    Tuoi Noleggi
+                  </Nav.Link>
+                </Nav.Item>
               )}
               {token && (
-                <Link to="/myappointments" className="nav-link">
-                  Tuoi Appuntamenti
-                </Link>
+                <Nav.Item>
+                  <Nav.Link eventKey="4" as={Link} to="/myappointments">
+                    Tuoi Appuntamenti
+                  </Nav.Link>
+                </Nav.Item>
               )}
             </Nav>
             {!token ? (

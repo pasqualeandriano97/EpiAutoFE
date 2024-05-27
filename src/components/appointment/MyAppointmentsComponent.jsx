@@ -5,7 +5,15 @@ import {
 } from "../../redux/actions/appointmentActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 
 const MyAppointmentsComponent = () => {
@@ -24,8 +32,9 @@ const MyAppointmentsComponent = () => {
   const currentCar = useSelector(
     (state) => state.appointment.currentAppointment
   );
+  const loading = useSelector((state) => state.appointment.loading);
   const [date1, setDate1] = useState();
-  const handleClose = () => dispatch(dispatch({ type: "HIDE_MODAL" }));
+  const handleClose = () => dispatch({ type: "HIDE_MODAL" });
   const handleShow = (current) => {
     dispatch({ type: "SHOW_MODAL" });
     dispatch({ type: "SET_APPOINTMENT", payload: current });
@@ -79,7 +88,12 @@ const MyAppointmentsComponent = () => {
         <h1 className="text-white text-center ">Grazie per averci scelto!</h1>{" "}
         <h1 className="text-white text-center mb-5">Lista Appuntamenti</h1>
         <Row>
-          {myAppointments &&
+          {loading ? (
+            <div className="text-center vh-100 d-flex align-items-center justify-content-center">
+              <Spinner animation="border" variant="secondary" />
+            </div>
+          ) : (
+            myAppointments &&
             myAppointments.map((appointment) => (
               <Col key={appointment.id} className="col-12">
                 <Row className="rounded-3 mb-3 p-2 rowBg">
@@ -113,30 +127,35 @@ const MyAppointmentsComponent = () => {
                     </p>
                   </Col>
                   <Col className="d-flex flex-column justify-content-between  col-6 col-lg-3">
-                    <div className="pt-5 mb-3 mb-lg-1">
+                    <div className="pt-2 pt-lg-5 mb-3 mb-lg-1">
                       <h4 className="text-white text-center">
                         Codice Prenotazione: {appointment.id}
                       </h4>
                     </div>
-                    <div className="d-flex flex-column justify-content-center pb-4 px-4">
-                      <Button
-                        variant="secondary"
-                        className="border-2 border-white mb-3"
-                        onClick={() => {
-                          handleShow(appointment);
-                        }}
-                      >
-                        Modifica
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          handleShow1(appointment);
-                        }}
-                      >
-                        Cancella
-                      </Button>
-                    </div>
+                    <Row className="d-flex justify-content-center pb-4 ">
+                      <Col className="col-7 col-xxl-6 d-flex justify-content-center">
+                        <Button
+                          variant="secondary"
+                          className="border-2 border-white mb-3 px-3 px-lg-4"
+                          onClick={() => {
+                            handleShow(appointment);
+                          }}
+                        >
+                          Modifica
+                        </Button>
+                      </Col>
+                      <Col className="col-7 col-xxl-6 d-flex justify-content-center">
+                        <Button
+                          className="px-3  mb-3 px-lg-4"
+                          variant="primary"
+                          onClick={() => {
+                            handleShow1(appointment);
+                          }}
+                        >
+                          Cancella
+                        </Button>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
                 <Modal show={show1} onHide={handleClose1}>
@@ -212,7 +231,8 @@ const MyAppointmentsComponent = () => {
                   </Modal>
                 )}
               </Col>
-            ))}
+            ))
+          )}
         </Row>
       </Container>
     </Container>

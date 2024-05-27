@@ -6,6 +6,8 @@ import {
   SHOW_MODAL,
   HIDE_MODAL,
   RESET_REDUX_APPOINTMENT,
+  LOADING_ON,
+  LOADING_OFF,
 } from "../actions/appointmentActions";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   summary: "",
   myAppointments: [],
   show: false,
+  loading: false,
 };
 
 export const appointmentReducer = (state = initialState, action) => {
@@ -56,6 +59,17 @@ export const appointmentReducer = (state = initialState, action) => {
         ...state,
         show: false,
       };
+    case LOADING_ON:
+      return {
+        ...state,
+        loading: true,
+      };
+    case LOADING_OFF:
+      return {
+        ...state,
+        loading: false,
+      };
+
     default:
       return state;
   }

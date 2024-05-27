@@ -1,4 +1,12 @@
-import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -18,6 +26,7 @@ const AppointmentComponent = () => {
   const currentAppointment = useSelector(
     (state) => state.appointment.currentAppointment
   );
+  const loading = useSelector((state) => state.appointment.loading);
   const handleShow1 = () => {
     setShow1(true);
   };
@@ -136,13 +145,22 @@ const AppointmentComponent = () => {
                 />
               </Col>
               <Col className="d-flex flex-column justify-content-center align-items-center  mt-3 pb-2 pb-lg-0 ">
-                <Button
-                  variant="primary"
-                  className="border border-radius"
-                  onClick={handleSummary}
-                >
-                  Riepilogo
-                </Button>
+                <div className="d-flex justify-content-center">
+                  <Button
+                    variant="primary"
+                    className="border border-radius"
+                    onClick={handleSummary}
+                  >
+                    Riepilogo
+                  </Button>
+                  {loading && (
+                    <Spinner
+                      className="ms-3"
+                      animation="border"
+                      variant="secondary"
+                    />
+                  )}
+                </div>
               </Col>
             </Row>
           </Col>

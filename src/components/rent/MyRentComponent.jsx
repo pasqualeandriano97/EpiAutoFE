@@ -2,10 +2,20 @@ import {
   getMyRentsA,
   deleteRentA,
   postRentA,
+  LOADING_ON,
+  LOADING_OFF,
 } from "../../redux/actions/rentActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 
 const MyRentComponent = () => {
@@ -14,6 +24,7 @@ const MyRentComponent = () => {
   const myRents = useSelector((state) => state.rent.myRents);
   const currentCar = useSelector((state) => state.rent.currentRent);
   const show = useSelector((state) => state.rent.show);
+  const loading = useSelector((state) => state.rent.loading);
   const [show1, setShow1] = useState(false);
   const [date1, setDate1] = useState();
   const handleShow1 = (current) => {
@@ -21,7 +32,7 @@ const MyRentComponent = () => {
     setShow1(true);
   };
   const handleClose1 = () => setShow1(false);
-  const handleClose = () => dispatch(dispatch({ type: "HIDE_MODAL" }));
+  const handleClose = () => dispatch({ type: "HIDE_MODAL" });
   const handleShow = (current) => {
     dispatch({ type: "SHOW_MODAL" });
     dispatch({ type: "SET_RENT_CAR", payload: current });
@@ -42,6 +53,7 @@ const MyRentComponent = () => {
     dispatch(deleteRentA(token, rentId));
     handleClose1();
   };
+
   const handleModify = (rentId) => {
     dispatch(
       postRentA(token, rentId, {
@@ -70,7 +82,12 @@ const MyRentComponent = () => {
         <h1 className="text-white text-center mb-5 ">Lista Noleggi</h1>
 
         <Row>
-          {myRents &&
+          {loading ? (
+            <div className="text-center vh-100 d-flex align-items-center justify-content-center">
+              <Spinner animation="border" variant="secondary" />
+            </div>
+          ) : (
+            myRents &&
             myRents.map((rent) => (
               <Col key={rent.id} className="col-12  mb-3 mb-lg-0">
                 <Row className=" rounded-3 mb-3 p-2 rowBg">
@@ -118,24 +135,29 @@ const MyRentComponent = () => {
                         Totale: {rent.price} €
                       </h4>
                     </div>
-                    <div className="d-flex flex-column justify-content-center pb-4 px-4">
-                      <Button
-                        variant="secondary"
-                        className="border-2 border-white mb-3 "
-                        onClick={() => {
-                          handleShow(rent);
-                        }}
-                      >
-                        Modifica
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          handleShow1(rent);
-                        }}
-                      >
-                        Cancella
-                      </Button>
+                    <Row className="d-flex justify-content-center pb-4 ">
+                      <Col className="col-7 col-xxl-6 d-flex justify-content-center">
+                        <Button
+                          variant="secondary"
+                          className="border-2 border-white mb-3 px-3 px-lg-4"
+                          onClick={() => {
+                            handleShow(rent);
+                          }}
+                        >
+                          Modifica
+                        </Button>
+                      </Col>
+                      <Col className="col-7 col-xxl-6 d-flex justify-content-center">
+                        <Button
+                          className="px-3  mb-3 px-lg-4"
+                          variant="primary"
+                          onClick={() => {
+                            handleShow1(rent);
+                          }}
+                        >
+                          Cancella
+                        </Button>
+                      </Col>
                       <Modal show={show1} onHide={handleClose1}>
                         <Modal.Header closeButton>
                           <Modal.Title>Attenzione!</Modal.Title>
@@ -157,7 +179,7 @@ const MyRentComponent = () => {
                           </Button>
                         </Modal.Footer>
                       </Modal>
-                    </div>
+                    </Row>
                   </Col>
                 </Row>
 
@@ -214,7 +236,8 @@ const MyRentComponent = () => {
                   </Modal>
                 )}
               </Col>
-            ))}
+            ))
+          )}
         </Row>
       </Container>
     </Container>

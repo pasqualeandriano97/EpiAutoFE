@@ -89,13 +89,7 @@
   background-attachment: fixed;
   min-height: 100vh;
 }
-/* .image {
-  background-image: url(../public/fullWideHero2.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-} */
+
 @media screen and (max-width: 1670px) {
   .image {
     margin-top: 70px;
@@ -145,6 +139,12 @@
     background-attachment: local;
     min-height: 140vh;
     min-width: 100vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .scale:hover {
+    scale: 1.1;
+    transition: scale 0.4s ease;
   }
 }
 

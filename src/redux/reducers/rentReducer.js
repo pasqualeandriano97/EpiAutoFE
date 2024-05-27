@@ -6,6 +6,8 @@ import {
   HIDE_MODAL,
   SET_MY_RENTS,
   RESET_REDUX_RENT,
+  LOADING_ON,
+  LOADING_OFF,
 } from "../actions/rentActions";
 
 const initialState = {
@@ -57,6 +59,16 @@ export const rentReducer = (state = initialState, action) => {
       return {
         ...state,
         myRents: action.payload,
+      };
+    case LOADING_ON:
+      return {
+        ...state,
+        loading: true,
+      };
+    case LOADING_OFF:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

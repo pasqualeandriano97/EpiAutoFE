@@ -1,4 +1,12 @@
-import { Container, Row, Col, Image, Button, Modal } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -15,6 +23,7 @@ const RentComponent = () => {
   const preventive = useSelector((state) => state.rent.preventive);
   const rent = useSelector((state) => state.rent.currentRent);
   const show = useSelector((state) => state.rent.show);
+  const loading = useSelector((state) => state.rent.loading);
   const handleShow1 = () => {
     setShow1(true);
   };
@@ -115,7 +124,6 @@ const RentComponent = () => {
               </Col>
             </Row>
           </Col>
-
           <Col className="cardBg rounded-3 ms-0 ms-lg-1 my-2 my-lg-0 d-flex flex-column col-12 col-md-5">
             <div>
               <h3 className="text-dark text-center my-2 pb-2  border-bottom">
@@ -166,13 +174,22 @@ const RentComponent = () => {
                 />
               </Col>
               <Col className="d-flex flex-column justify-content-center align-items-center mt-3 pb-2 pb-lg-0">
-                <Button
-                  variant="primary"
-                  className="border border-radius"
-                  onClick={handlePreventive}
-                >
-                  Preventivo
-                </Button>
+                <div className="d-flex justify-content-center align-items-center w-100">
+                  <Button
+                    variant="primary"
+                    className="border border-radius"
+                    onClick={handlePreventive}
+                  >
+                    Preventivo
+                  </Button>{" "}
+                  {loading && (
+                    <Spinner
+                      className="ms-3"
+                      animation="border"
+                      variant="secondary"
+                    />
+                  )}
+                </div>
               </Col>
             </Row>
           </Col>

@@ -5,6 +5,9 @@ export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const SET_MY_RENTS = "SET_MY_RENTS";
 export const RESET_REDUX_RENT = "RESET_REDUX_RENT";
+export const LOADING_ON = "LOADING_ON";
+export const LOADING_OFF = "LOADING_OFF";
+
 import {
   showRent,
   saveRent,
@@ -15,10 +18,15 @@ import {
 
 export const setPreventive = (token, payload) => {
   return async (dispatch) => {
-    const response = await showRent(token, payload);
-    if (response) {
-      dispatch({ type: SET_PREVENTIVE, payload: response });
-      dispatch({ type: SHOW_MODAL });
+    dispatch({ type: LOADING_ON });
+    try {
+      const response = await showRent(token, payload);
+      if (response) {
+        dispatch({ type: SET_PREVENTIVE, payload: response });
+        dispatch({ type: SHOW_MODAL });
+      }
+    } finally {
+      dispatch({ type: LOADING_OFF });
     }
   };
 };
@@ -35,10 +43,14 @@ export const saveRentA = (token, payload) => {
 
 export const getMyRentsA = (token) => {
   return async (dispatch) => {
-    const response = await getMyRents(token);
-    if (response) {
-      console.log(response);
-      dispatch({ type: SET_MY_RENTS, payload: response.content });
+    dispatch({ type: LOADING_ON });
+    try {
+      const response = await getMyRents(token);
+      if (response) {
+        dispatch({ type: SET_MY_RENTS, payload: response.content });
+      }
+    } finally {
+      dispatch({ type: LOADING_OFF });
     }
   };
 };

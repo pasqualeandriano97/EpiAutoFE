@@ -31,7 +31,7 @@ const SingleCar = (vehicle) => {
     }
   };
   return (
-    <Col className="col-12 col-md-4 col-lg-3 ">
+    <Col className="col-12 col-md-4 col-lg-3 scale">
       <Card style={{ height: "100%" }} className="cardBg">
         <Card.Img
           variant="top"

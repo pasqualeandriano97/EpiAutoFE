@@ -17,10 +17,15 @@ import {
 
 export const setSummaryA = (token, payload) => {
   return async (dispatch) => {
-    const response = await showAppointment(token, payload);
-    if (response) {
-      dispatch({ type: SET_SUMMARY, payload: response });
-      dispatch({ type: SHOW_MODAL });
+    dispatch({ type: LOADING_ON });
+    try {
+      const response = await showAppointment(token, payload);
+      if (response) {
+        dispatch({ type: SET_SUMMARY, payload: response });
+        dispatch({ type: SHOW_MODAL });
+      }
+    } finally {
+      dispatch({ type: LOADING_OFF });
     }
   };
 };
@@ -38,10 +43,15 @@ export const saveAppointmentA = (token, payload) => {
 
 export const getMyAppointmentsA = (token) => {
   return async (dispatch) => {
-    const response = await getMyAppointments(token);
-    if (response) {
-      console.log(response);
-      dispatch({ type: SET_MY_APPOINTMENTS, payload: response });
+    dispatch({ type: LOADING_ON });
+    try {
+      const response = await getMyAppointments(token);
+      if (response) {
+        console.log(response);
+        dispatch({ type: SET_MY_APPOINTMENTS, payload: response });
+      }
+    } finally {
+      dispatch({ type: LOADING_OFF });
     }
   };
 };
