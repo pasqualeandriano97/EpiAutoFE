@@ -84,7 +84,7 @@
 }
 
 .appointmentBg {
-  background-image: url(../public/AppointmentBg1.png);
+  background-image: url(../public/appointmentBg1.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
