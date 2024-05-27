@@ -68,6 +68,7 @@ const MyAppointmentsComponent = () => {
       })
     );
   };
+
   const translateFuel = (fuel) => {
     switch (fuel) {
       case "GASOLINE":
