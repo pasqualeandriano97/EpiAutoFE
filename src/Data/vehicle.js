@@ -1,14 +1,13 @@
+const baseUrl = "https://andrianopasquale-andrianopasquale-13cce7cc.koyeb.app/";
+
 export const allVehicles = (token, page) => {
-  return fetch(
-    `https://epiauto-andrianopasquale-b63eda7e.koyeb.app/vehicle?page=${page}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  return fetch(baseUrl + `vehicle?page=${page}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       if (response.ok) {
         return response.json();

@@ -1,5 +1,7 @@
+const baseUrl = "https://andrianopasquale-andrianopasquale-13cce7cc.koyeb.app/";
+
 export const userDetails = (token) => {
-  return fetch(`https://epiauto-andrianopasquale-b63eda7e.koyeb.app/user/me`, {
+  return fetch(baseUrl + `user/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -21,7 +23,7 @@ export const userDetails = (token) => {
 };
 
 export const updateUser = (token, user) => {
-  return fetch(`https://epiauto-andrianopasquale-b63eda7e.koyeb.app/user/me`, {
+  return fetch(baseUrl + `user/me`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -45,7 +47,7 @@ export const updateUser = (token, user) => {
 };
 
 export const deleteUser = (token) => {
-  return fetch(`https://epiauto-andrianopasquale-b63eda7e.koyeb.app/user/me`, {
+  return fetch(baseUrl + `user/me`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

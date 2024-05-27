@@ -1,16 +1,14 @@
+const baseUrl = "https://andrianopasquale-andrianopasquale-13cce7cc.koyeb.app/";
+
 export const showRent = (token, payload) => {
-  return fetch(
-    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/rent?plate=" +
-      payload.plate,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  )
+  return fetch(baseUrl + "rent?plate=" + payload.plate, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -26,17 +24,14 @@ export const showRent = (token, payload) => {
 };
 
 export const saveRent = (token, payload) => {
-  return fetch(
-    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/rent/save",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  )
+  return fetch(baseUrl + "rent/save", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -52,7 +47,7 @@ export const saveRent = (token, payload) => {
 };
 
 export const getMyRents = (token) => {
-  return fetch("https://epiauto-andrianopasquale-b63eda7e.koyeb.app/rent/me", {
+  return fetch(baseUrl + "rent/me", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -74,16 +69,13 @@ export const getMyRents = (token) => {
 };
 
 export const deleteRent = (token, id) => {
-  return fetch(
-    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/rent/me?rentId=" + id,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  return fetch(baseUrl + "rent/me?rentId=" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -99,18 +91,14 @@ export const deleteRent = (token, id) => {
 };
 
 export const postRent = (token, rent, payload) => {
-  return fetch(
-    "https://epiauto-andrianopasquale-b63eda7e.koyeb.app/rent/post?rentId=" +
-      rent,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  )
+  return fetch(baseUrl + "rent/post?rentId=" + rent, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
     .then((response) => {
       if (response.ok) {
         return response.json();
