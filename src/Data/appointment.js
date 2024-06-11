@@ -1,4 +1,4 @@
-const baseUrl = "https://andrianopasquale-andrianopasquale-13cce7cc.koyeb.app/";
+import { baseUrl } from "./apiUrl";
 
 export const showAppointment = (token, payload) => {
   return fetch(baseUrl + "appointment/me?plate=" + payload.vehicle, {

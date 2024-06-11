@@ -95,7 +95,7 @@
 @media screen and (max-width: 1670px) {
   .image {
     margin-top: 70px;
-    background-image: url(../public/desktopHero.png);
+    background-image: url(../public/homePage.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -108,7 +108,7 @@
 @media screen and (max-width: 1550px) {
   .image {
     margin-top: 70px;
-    background-image: url(../public/desktopHero.png);
+    background-image: url(../public/homePage.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -121,7 +121,7 @@
 @media screen and (max-width: 1250px) {
   .image {
     margin-top: 70px;
-    background-image: url(../public/desktopHero.png);
+    background-image: url(../public/homePage.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center bottom;

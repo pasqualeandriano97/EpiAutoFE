@@ -1,9 +1,10 @@
-import { Image, Container } from "react-bootstrap";
-import React, { useState, useEffect } from "react";
+import { Image } from "react-bootstrap";
+import { useState, useEffect } from "react";
 import debounce from "lodash/debounce";
 
 const HomeComponent = () => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const token = window.localStorage.getItem("token");
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,10 +31,17 @@ const HomeComponent = () => {
             width: "100%",
           }}
         >
-          <Image
-            src="fullWideHero2.png"
-            style={{ maxHeight: "100%", width: "100%" }}
-          ></Image>
+          {token ? (
+            <Image
+              src="fullWideHero2.png"
+              style={{ maxHeight: "100%", width: "100%" }}
+            ></Image>
+          ) : (
+            <Image
+              src="homePage.png"
+              style={{ maxHeight: "100%", width: "100%" }}
+            ></Image>
+          )}
         </div>
       ) : (
         <div className="image"></div>
