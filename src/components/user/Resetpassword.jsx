@@ -12,11 +12,11 @@ const ResetPassword = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const params = useParams();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (passwordsMatch) {
       try {
-        resetPassword(params.token, password);
+        await resetPassword(params.token, password);
         window.location.href = "/";
       } catch (error) {
         alert(error.message);

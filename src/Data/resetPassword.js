@@ -37,7 +37,6 @@ export const resetPassword = async (token, newPassword) => {
     .then((response) => {
       if (response.ok) {
         alert("Password reimpostata con successo");
-
         return response.json();
       } else {
         return response.json().then((data) => {
