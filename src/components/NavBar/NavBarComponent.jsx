@@ -108,7 +108,7 @@ function NavbarComponent() {
             <Container fluid className="px-4">
               <Navbar.Brand as={Link} to="/">
                 <Image
-                  src={"../../../public/Logowbg.png"}
+                  src={"NavBarLogo.png"}
                   height={60}
                   width={180}
                   alt={"Logo"}
