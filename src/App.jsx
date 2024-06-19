@@ -32,6 +32,7 @@ function App() {
             path="/auth/reset-password/:token"
             element={<ResetPassword />}
           />
+          <Route path="*" element={<HomeComponent />} />
         </Routes>
       </main>
       <footer></footer>
