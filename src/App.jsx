@@ -11,6 +11,7 @@ import AppointmentComponent from "./components/appointment/AppointmentComponent"
 import MyAppointmentsComponent from "./components/appointment/MyAppointmentsComponent";
 import HomeComponent from "./components/home/HomeComponent";
 import UserDetails from "./components/user/UserDetails";
+import ResetPassword from "./components/user/Resetpassword";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
           <Route path="/appointment" element={<AppointmentComponent />} />
           <Route path="/myappointments" element={<MyAppointmentsComponent />} />
           <Route path="/user" element={<UserDetails />} />
+          <Route
+            path="/auth/reset-password/:token"
+            element={<ResetPassword />}
+          />
         </Routes>
       </main>
       <footer></footer>

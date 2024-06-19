@@ -1,13 +1,16 @@
 import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import debounce from "lodash/debounce";
+import { useDispatch } from "react-redux";
 
 const HomeComponent = () => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const token = window.localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
+      dispatch({ type: "SHOW_NAVBAR" });
       setViewportWidth(window.innerWidth);
       console.log(viewportWidth);
     };
