@@ -60,7 +60,7 @@ export const postAppointmentA = (token, appointment, payload) => {
   return async (dispatch) => {
     const response = await postAppointment(token, appointment, payload);
     if (response) {
-      alert("Noleggio modificato con successo!");
+      alert("Appuntamento modificato con successo!");
       dispatch(getMyAppointmentsA(token));
     }
     console.log(response);
