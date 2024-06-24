@@ -12,6 +12,7 @@ import MyAppointmentsComponent from "./components/appointment/MyAppointmentsComp
 import HomeComponent from "./components/home/HomeComponent";
 import UserDetails from "./components/user/UserDetails";
 import ResetPassword from "./components/user/Resetpassword";
+import Footer from "./components/home/Footer";
 
 function App() {
   return (
@@ -35,7 +36,9 @@ function App() {
           <Route path="*" element={<HomeComponent />} />
         </Routes>
       </main>
-      <footer></footer>
+      <footer>
+        <Footer />
+      </footer>
     </BrowserRouter>
   );
 }

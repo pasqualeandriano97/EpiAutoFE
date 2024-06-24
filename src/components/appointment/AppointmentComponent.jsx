@@ -168,7 +168,7 @@ const AppointmentComponent = () => {
         {summary ? (
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Riepilogo prenotazione noleggio</Modal.Title>
+              <Modal.Title>Riepilogo prenotazione appuntamento</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="d-flex">
